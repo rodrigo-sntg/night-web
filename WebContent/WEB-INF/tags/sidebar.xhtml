@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+
+    <script type="text/javascript">
+		function showMenu(){
+			var box = $('.side-menu');
+			if (box.hasClass('hidden')) {
+			  	box.removeClass('hidden');
+		   		box.removeClass('visuallyhidden');
+			} else {
+			  box.addClass('visuallyhidden');
+			  box.addClass('hidden');
+			}
+		}
+    </script>
+</h:head>
+<h:body>
+	<ui:composition>
+		<div class="side-menu hidden">
+			<div class="myMenu">
+				<div class="ui left fixed vertical menu" style="position: fixed;border-top: 50px;border-left: none;top: 50px;">
+					<div class="item">
+						<h2><b>DOSIS</b></h2>
+					</div>
+					<a class="item" onclick="document.location='cadastro.xhtml'"><i class="user big icon " style="float: left;margin-left: 0px;margin-top: -5px;padding-right: 10px;"></i>Cliente</a>
+					<a class="item" onclick="document.location='listaProduto.xhtml'"><i class="list layout big icon " style="float: left;margin-left: 0px;margin-top: -5px;padding-right: 10px;"></i>Lista Produto</a>
+					<a class="item" onclick="document.location='listaEstoque.xhtml'"><i class="database big icon " style="float: left;margin-left: 0px;margin-top: -5px;padding-right: 10px;"></i>Lista Estoque</a>
+					<a class="item" onclick="document.location='comanda.xhtml'"><i class="in cart big icon " style="float: left;margin-left: 0px;margin-top: -5px;padding-right: 10px;"></i>Comanda</a>
+					<a class="item" onclick="document.location='grafico.xhtml'"><i class="bar chart big icon " style="float: left;margin-left: 0px;margin-top: -5px;padding-right: 10px;"></i>Análise</a>
+				</div>
+			</div>
+		</div>
+	</ui:composition>
+</h:body>
+</html>
+
+

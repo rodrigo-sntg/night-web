@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:mkyong="http://rodrigo.com/facelets">
+<h:head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comanda</title>
+  <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" type="text/css" href="lib/semantic/dist/semantic.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+  <script src="lib/semantic/examples/assets/library/jquery.min.js"></script>
+  <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/jquery-mask.js"></script>
+  <script src="lib/semantic/dist/semantic.min.js"></script>
+  <script src="js/comanda.js"></script>
+   <script src="js/interface.js"></script>
+  <script src="js/list.js"></script>
+
+    <script type="text/javascript">
+
+
+    $( document ).ready(function() {
+    	$(".tabular.menu .item").tab();
+//     	$('.money').mask('000.000.000.000.000,00', {reverse: true});
+        $('.ui.dropdown').dropdown();
+         //$('.basic.modal').modal('setting', 'closable', false).modal('show');
+        $('.ui.modal').modal();
+//         $('.percent').mask('##0,00%', {reverse: true});
+        
+
+  });
+    
+    </script>
+    <style type="text/css">
+    
+.sub-row{
+	display: table-row;
+	font-size: 10px;
+}
+
+.tab-row{
+	display:table-row;
+	border-collapse: collapse;
+}
+
+.ui.primary.button, .ui.primary.buttons .button {
+    background-color: #044271 !important;
+    color: #FFF;
+    text-shadow: none;
+    background-image: none;
+}
+
+.ui.primary.button:hover, .ui.primary.buttons .button:hover {
+    background-color: #0961A5 !important;
+    color: #FFF;
+    text-shadow: none;
+}
+.conteudoL{
+	float: left;
+	position: relative;
+	width: 29%;
+	margin-top: 2%;
+	left: 10px;
+}
+
+.conteudoR{
+	float: left;
+	position: relative;
+	width: 60%;
+	margin-top: 2%;
+}
+@media only screen and (max-width: 800px) {
+	.conteudoL{
+		float: left;
+		position: relative;
+		width: 100%;
+		margin-top: 35px;
+		padding-right: 25px;
+		height: 350px;
+		overflow: auto;
+	}
+	
+	.conteudoR{
+		float: left;
+		position: relative;
+		width: 100%;
+		margin-top: 2%;
+	}
+		
+}
+
+@media only screen and (min-width: 800px) {
+    .conteudoL{
+		float: left;
+		position: relative;
+		width: 29%;
+		left: 10px;
+		height: 350px;
+		overflow: auto;
+	}
+	
+	.conteudoR{
+		float: left;
+		position: relative;
+		width: 70%;
+		padding-left:10px;
+		margin-top: 2%;
+	}
+}
+	</style>
+  </h:head>
+  <h:body>
+	<header>
+	
+	</header>
+	<div class="topo">
+	<div class="head-container">
+      <div style="position: absolute;left: 0;top: 0; height: 2px; width: 100%;">
+        <div style="height: 100%; display: none; width: 10%;" class="lv-progress-bar"></div>
+      </div>
+      <div class="head-content">
+        <div class="table height-100">
+          <div  class="table-cell height-100 vertical-middle lv-btn" onclick="showMenu()" role="button" tabindex="0">
+            <div class="contrast-list pointer inline-block"><i class="content big icon"></i></div>
+          </div>
+          <div class="table-cell vertical-middle height-100 width-100 white dash-title">
+            <div class="title-wrap-index">
+              <translate class="">Comanda</translate>
+            </div>
+          </div>
+          <div class="table-cell vertical-middle">
+            <div style="visibility: visible; cursor:default" title="date: 2016.10.25-14:59:16 V-17.36" class="nowrap padding-5 version transparent"></div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+    <div class="faixa"></div>
+    <mkyong:button />
+    
+	<div class="conteudoTopo">
+		<div class="ui raised very padded text container segment" style="max-width:1024px !important">
+			<h:form id="frm" onkeypress="if (event.keyCode == 13) { document.getElementById('form:consulta').click(); return false; }">
+				<h:panelGroup class="field" rendered="#{comandaManagedBean.comanda.id == 0}" id="inputTexto">
+				
+				<h4 class="ui dividing header">Numero Comanda</h4>
+				<div class="one field">
+				  <div class="field">
+				    <div class="ui fluid icon input">
+				      <h:inputText style="width:100%;" placeholder="Pesquisa por CPF, Nome ou numero da Comanda" value="#{comandaManagedBean.comanda.numeroComanda}" styleId="consulta" type="text"/>
+				      <i  onclick="$('#pesquisaComanda').click()" class="search icon"></i>
+				    </div>
+				  </div>
+				</div>
+				</h:panelGroup>
+				<div class="ui" style="margin-top:5px">
+					<h:panelGroup class="field" rendered="#{comandaManagedBean.comanda.id == 0}" id="botaoConsulta">
+						<div class="field">
+					      	<h:commandButton styleClass="primary ui fluid button" binding="#{comandaManagedBean.btpesquisar}" value="Pesquisar" 
+					      		styleId="btpesquisar" action="#{comandaManagedBean.consultar}"/>
+						</div>
+					</h:panelGroup>
+					
+					<h:panelGroup class="field" rendered="#{comandaManagedBean.comanda.id != 0}" id="botaoNova">
+						<div class="field">
+							<h:link styleClass="submit ui fluid button" outcome="comanda" value="Nova Consulta" />
+						</div>
+					</h:panelGroup>
+				</div>
+				<h:commandButton styleClass="positive ui button" style="display:none"  binding="#{comandaManagedBean.btalterar}" 
+		              id="btalterar" value="Alterar" action="#{comandaManagedBean.alterar}"></h:commandButton>
+			</h:form>
+		</div>
+	</div>
+	
+	<h:panelGroup class="field" rendered="#{comandaManagedBean.comanda.id != 0}" id="dadosComanda">
+		<div class="conteudoL ui" style="margin-top: 35px;padding-right: 25px;">
+			<div class="ui top attached tabular menu">
+	  			<div class="item active" data-tab="itens">Itens</div>
+				<div class="item" data-tab="favoritos">Favoritos</div>
+				<div class="right menu">
+					<div class="item">
+					  <div class="ui transparent icon input">
+					    <input placeholder="Nome Item" type="text"/>
+					    <i class="search link icon"></i>
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div class="ui tab active" data-tab="itens">
+		  		<div class="ui bottom attached segment">
+			  		<div class="ui middle aligned divided list">
+				  		<ui:repeat value="#{comandaManagedBean.listaItens}" var="value">
+					    	<div class="item">
+							    <div class="right floated content">
+							      <div class="ui button">Add</div>
+							    </div>
+							    <div class="content">
+							      #{value.nomeItem}
+							    </div>
+						  	</div>
+						</ui:repeat>
+					</div>
+				</div>
+			</div>
+			<div class="ui tab" data-tab="favoritos">
+			  	<div class="ui bottom attached segment">
+					<p>teste</p>
+				</div>
+			</div>
+		</div>
+	
+		<div class="conteudoR">
+			<div class="ui container">
+					<div class="ui stackable two column grid">
+						    <div class="sixteen wide column">
+						      <div class="divComanda">
+						        <div class="perfilResumido">
+						          <h2 class="ui header">
+						            <div class="content">
+						              #{comandaManagedBean.comanda.cliente.nome}
+						              <div class="sub header"> Consumo COMANDA Nº #{comandaManagedBean.comanda.numeroComanda}</div>
+						            </div>
+						         </h2>
+						       </div>
+						       
+						       	<h:panelGroup class="field" id="tabela">
+						       		<div class="tab-comanda">
+						       			
+										<div class="ui tab active" data-tab="com">
+									  		<div class="ui bottom attached segment">
+										  		<div class="ui middle aligned divided list">
+													<ui:repeat value="#{comandaManagedBean.comanda.listaItemComanda}" var="i">
+														<div class="item">
+															<div class="right floated content">
+														      	<div class="">R$ #{i.quantidade * i.item.precoVenda}</div>
+						       									<div class="sub-row">#{i.quantidade} x R$ #{i.item.precoVendaView}</div>
+														    </div>
+														    <div class="content">
+														      	<div class="row">#{i.quantidade} x #{i.item.nomeItem}</div>
+					       										<div class="sub-row">Codigo: #{i.item.id}</div>	
+														    </div>
+														</div>
+							                  		</ui:repeat>
+							                  		<div class="item">
+														<div class="right floated content">
+													      	<div class=""><h4>R$ #{comandaManagedBean.comanda.valorTotalView}</h4></div>
+													    </div>
+													    <div class="content">
+													      	<div class="row"><h4>Total</h4></div>
+													    </div>
+													</div>
+												</div>
+											</div>
+										</div>
+						       		
+						       		</div>
+									<div class="tab-comanda">
+				                      <div class="ui right floated pagination menu">
+				                        <a class="icon item" onclick="$('#modalNovo').modal('show');return false;">
+				                          <i class="add chevron icon"></i>
+				                        </a>
+				                      </div>
+						          </div>
+								</h:panelGroup>
+					          <div class="two fields" style="margin-top:20px">
+						          <div class="field">
+						            <button class="ui primary fluid button" onclick="$('#modalFechar').modal('show');return false;" >
+						                Finalizar Comanda
+						            </button>
+						          </div>
+					          </div>
+					      </div>
+					    </div>
+				  </div>
+			</div>
+		
+		
+		  	<div class="ui modal" id="modalNovo">
+			    <i class="close icon"></i>
+			    <div class="header">
+			      Adicionar à comanda
+			    </div>
+				<div class="content">
+					<h:form class="ui form">
+					        <div class="one field">
+					          <div class="field">
+					            <label>Item</label>
+					            <h:selectOneMenu styleClass="ui search selection dropdown" value="#{comandaManagedBean.item.id}" class="ui fluid dropdown">
+				                 <f:selectItem itemValue="" itemLabel=""/>
+					              	<f:selectItems value="#{comandaManagedBean.listaItens}" var="i"
+						                  itemLabel="#{i.nomeItem}" itemValue="#{i.id}" />
+						            <f:ajax event="change" update="@this" />
+				                </h:selectOneMenu>
+				
+					          </div>
+					          <div class="field">
+					            <label>Quantidade</label>
+					            <h:inputText id="quantidadeItens"  value="#{comandaManagedBean.qtd}">
+					            	<f:ajax event="change" update="@this" />
+					        	</h:inputText>
+					          </div>
+					        </div>
+					    <div class="actions">
+					      <div class="ui button">Cancel</div>
+					      <h:commandButton styleClass="positive ui button"  immediate="false"
+							        			value="Adicionar" onclick="$('.ui.modal').hide();" action="#{comandaManagedBean.inserirItemLista}">
+							        			<f:ajax render="@form @this tabela" immediate="false"/>
+							        			</h:commandButton>
+					    </div>
+				    </h:form>
+				</div>
+		  	</div>
+			
+		  	<div class="ui modal" id="modalFechar">
+		      	<i class="close icon"></i>
+		      	<div class="header">
+		        	Fechar Comanda
+				</div>
+				<div class="content">
+			        <h:form class="ui form" id="formFechar">
+						<div class="ui grid">
+							<div class="eight wide column">
+								<div class="field">
+									<label>Valor</label>
+				                    <h:inputText styleClass="money" disabled="true" id="valor" name="comanda[valor]" onblur="somar();valorTroco()"  value="#{comandaManagedBean.comanda.valorTotalView}" placeholder="Valor" type="text" />
+			                  	</div>
+			              	</div>
+			           	  	<div class="eight wide column">
+				              <div class="field">
+			                    <label>Couver</label>
+			                    <h:inputText styleClass="money" id="couver" value="#{comandaManagedBean.pagamento.couver}"
+			                     onblur="somar();valorTroco();" name="comanda[couver]" 
+			                     placeholder="Couver Artístico" type="text" />
+			                  </div>
+			              	</div>
+			              	<div class="eight wide column">
+				              <div class="field">
+			                    <label>Taxa Serviço (%)</label>
+			                    <h:inputText styleClass="percent" id="taxaServico" 
+			                    	value="#{comandaManagedBean.pagamento.taxaServico}"
+			                    	onblur="somar();valorTroco();" name="comanda[taxaServico]" 
+			                    	placeholder="Taxa Serviço" type="text" />
+			                  </div>
+			              	</div>
+			              	<div class="eight wide column">
+			            	    <div class="field">
+			            	        <label>Desconto</label>
+			           		        <h:inputText styleClass="money" id="desconto" value="#{comandaManagedBean.pagamento.desconto}"
+			           		        	onblur="somar();valorTroco();" name="comanda[desconto]" 
+			           		        	placeholder="Desconto" type="text" />
+								</div>
+			              	</div>
+							<div id="valorPagoDiv" class="eight wide column" style="display:none">
+								<div class="field">
+									<label>Valor Pago</label>
+									<h:inputText class="money" id="valorPago" value="#{comandaManagedBean.pagamento.valorRecebido}"
+										onblur="valorTroco()" name="comanda[valorPago]" 
+										placeholder="Valor Pago" type="text" />
+				                </div>
+				            </div>
+			            	<div id="trocoDiv" class="eight wide column" style="display:none">
+								<div class="field">
+									<label>Troco</label>
+				                    <h:inputText styleClass="money" id="troco" value="#{comandaManagedBean.pagamento.valorTroco}" 
+				                    	name="comanda[troco]" placeholder="troco" type="text" />
+			                  	</div>
+				            </div>
+	
+	
+			              	<div class="sixteen wide column"><h3 class="ui dividing header">Pagamento</h3></div>
+	
+			              	<div class="six wide column">
+			                	<div class="field">
+			                  		
+									<div class="grouped fields">
+										<h4 class="ui dividing header">Forma de Pagamento</h4>
+				                    	<div class="field">
+				                    		<div class="ui radio checkbox">
+					                    		<h:selectOneRadio  value="#{comandaManagedBean.pagamento.formaPagamento}" layout="pageDirection">
+						                            <f:selectItem id="debito" itemLabel="Débito" itemValue="debito" />
+						                            <f:selectItem id="credito" itemLabel="Crédito" itemValue="credito" />
+						                            <f:selectItem id="dinheiro" itemLabel="Dinheiro" itemValue="dinheiro" />
+						                            <f:ajax event="change" onevent="verificaTroco"></f:ajax>
+						                        </h:selectOneRadio>
+				                    		</div>
+				           				</div>
+									</div>
+				              	</div>
+				            </div>
+	
+							<div class="six wide column">
+								<div class="field">
+	
+									<div class="grouped fields">
+										<h4 class="ui dividing header">Bandeira Cartão</h4>
+				                    	<div class="field">
+				                    		<div class="ui radio checkbox">
+					                    		<h:selectOneRadio  value="#{comandaManagedBean.pagamento.bandeira}" layout="pageDirection">
+						                            <f:selectItem id="visa" itemLabel="Visa" itemValue="visa" />
+						                            <f:selectItem id="master" itemLabel="Mastercard" itemValue="mastercard" />
+						                            <f:selectItem id="dinners" itemLabel="Dinners Club" itemValue="dinnersclub" />
+						                            <f:selectItem id="amex" itemLabel="American Express" itemValue="americanexpress" />
+						                            <f:ajax event="change" onevent="verificaTroco"></f:ajax>
+						                        </h:selectOneRadio>
+				                    		</div>
+				           				</div>
+									</div>
+								    
+							    </div>
+							</div>
+	
+			          		<div class="four wide column">
+			               		<div class="field">
+			                  		<h4 class="ui dividing header">Valor Total</h4>
+			                  		<h:inputText styleClass="money" id="total" name="total"  placeholder="Total" type="text" />
+			            		</div>
+			          		</div>
+			      		</div>
+						<div class="actions">
+				        	<div class="ui button">Cancel</div>
+				        	<h:commandButton styleClass="positive  ui button"  binding="#{comandaManagedBean.btsalvar}" 
+					        	id="btsalvar" value="Salvar" action="#{comandaManagedBean.fecharComanda}">
+					        	
+					        </h:commandButton>
+				      	</div>
+					</h:form>
+		  		</div>
+			</div>
+		</div>
+	</h:panelGroup>
+</h:body>
+</html>
+
+

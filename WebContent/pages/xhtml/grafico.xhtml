@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ct="http://rodrigo.com/facelets">
+  <h:head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Gráfico</title>
+    <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="lib/semantic/dist/semantic.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+    <script src="lib/semantic/examples/assets/library/jquery.min.js"/>
+    <script src="lib/semantic/dist/semantic.min.js"/>
+
+    <script src="js/highcharts.js"/>
+    <script src="js/data.js"/>
+    <script src="js/drilldown.js"/>
+    <script src="js/interface.js"/>
+
+    <script type="text/javascript">
+    $( document ).ready(function() {
+    	$(function vendas() {
+	    	var dat = $("input[name='j_idt8:dadosGrafico']").val();        
+	    	var gtdata = [];
+	    	gtdata = JSON.parse(dat);
+	    	console.log(gtdata)
+	    	
+	    	var drilldown = $("input[name='j_idt8:drilldown']").val();        
+	    	var gtdatadrilldown = [];
+	    	gtdatadrilldown = JSON.parse(drilldown);
+	    	console.log(gtdatadrilldown)
+        	
+	      // Create the chart
+	      $('#container').highcharts({
+	          chart: {
+	              type: 'column'
+	          },
+	          title: {
+	              text: 'Faturamento Mensal 2016'
+	          },
+	          credits: {
+	              enabled: false
+	          },
+	          subtitle: {
+	              text: 'Clique nos meses para detalhar por semana'
+	          },
+	          xAxis: {
+	              type: 'category'
+	          },
+	          yAxis: {
+	              title: {
+	                  text: 'Faturamento'
+	              }
+	
+	          },
+	          legend: {
+	              enabled: false
+	          },
+	          plotOptions: {
+	              series: {
+	                  borderWidth: 0,
+	                  dataLabels: {
+	                      enabled: true,
+	                      format: 'R$ {point.y:.2f}'
+	                  }
+	              }
+	          },
+	
+	          tooltip: {
+	              headerFormat: '<span style="font-size:11px">{series.name}</span><br/>',
+	              pointFormat: '<span style="color:{point.color}">{point.name}</span>: R$ <b>{point.y:.2f}</b> de faturamento<br/>'
+	          },
+	
+	          series: [{
+	              name: 'Brands',
+	              colorByPoint: true,
+	              data: gtdata
+	          }],
+	          drilldown: {
+	              series: gtdatadrilldown
+	          }
+      		});
+  		});
+    	
+    	$(function fnCliente() {
+        	var meses = $("input[name='j_idt8:meses']").val();        
+        	var faturamento = $("input[name='j_idt8:faturamento']").val();   
+        	var clientes = $("input[name='j_idt8:dadoCliente']").val();   
+        	var dat = $("input[name='j_idt8:dadosGrafico']").val();        
+
+        	var gtdata = [];
+        	var gtdatameses = [];
+        	var gtdatafaturamento = [];
+        	var gtdataclientes = [];
+        	
+        	gtdata = JSON.parse(dat);
+        	console.log(gtdata)
+        	
+        	gtdatameses = JSON.parse(meses);
+        	console.log(gtdatameses)
+        	
+        	gtdatafaturamento = JSON.parse(faturamento);
+        	console.log(gtdatafaturamento)
+        	
+        	gtdataclientes = JSON.parse(clientes);
+        	console.log(gtdataclientes)
+        	
+        	 $('#containerCli').highcharts({
+                chart: {
+                    zoomType: 'xy'
+                },
+                title: {
+                    text: 'Faturamento x Quantidade Clientes Mês'
+                },
+                subtitle: {
+                    text: ''
+                },
+                credits: {
+    	              enabled: false
+    	          },
+                xAxis: [{
+                    categories: gtdatameses,
+                    crosshair: true
+                }],
+                yAxis: [{ // Primary yAxis
+                    labels: {
+                        format: '{value}',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+                    title: {
+                        text: 'Qtd Clientes',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    }
+                }, { // Secondary yAxis
+                    title: {
+                        text: 'Faturamento (R$)',
+                        style: {
+                            color: Highcharts.getOptions().colors[0]
+                        }
+                    },
+                    labels: {
+                        format: 'R$ {value:.2f}',
+                        style: {
+                            color: Highcharts.getOptions().colors[0]
+                        }
+                    },
+                    opposite: true
+                }],
+                tooltip: {
+                    shared: true
+                },
+                legend: {
+                	enabled: true,
+            		floating: false,
+            		verticalAlign: 'bottom',
+            		align:'right',
+            		y:10,
+            },
+                series: [{
+                    name: 'Faturamento',
+                    type: 'column',
+                    yAxis: 1,
+                    tooltip: {
+                        valuePrefix: 'R$ '
+                    },
+                    data: gtdatafaturamento
+
+
+                }, {
+                    name: 'Comandas',
+                    type: 'spline',
+                    tooltip: {
+                        valueSuffix: ' pessoas'
+                    },
+                    data: gtdataclientes
+                }]
+            });
+        });
+    });
+
+    </script>
+  </h:head>
+  <h:body>
+  <ct:header titulo="Gráficos"/>
+  <div class="faixa"></div>
+  <ct:sidebar/>
+    <h:form>
+		<div class="conteudo">
+		    <div class="ui raised very padded text container segment">
+		      	<h3 class="ui dividing header">Faturamento</h3>
+		      	<h:commandButton value="Faturamento por Mês" onclick="vendas()" action="#{graficoManagedBean.consultar}" >
+			    	<f:ajax update="@form" event="change" />
+			    </h:commandButton>
+			    <h:commandButton value="Faturamento x Clientes" onclick="fnCliente()" action="#{graficoManagedBean.graficoClienteFaturamento}" >
+			    	<f:ajax update="@form graficoVendas graficoClientes" event="click" />
+			    </h:commandButton>
+			    <h:commandButton value="Detalhes" action="#{graficoManagedBean.buscarDetalhes}" >
+			    	<f:ajax update="@form graficoVendas graficoClientes" event="click" />
+			    </h:commandButton>
+			    <h:panelGroup id="graficoVendas" rendered="#{graficoManagedBean.graficoVendas}">
+					<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+			    </h:panelGroup>
+				<h:panelGroup id="graficoClientes" rendered="#{graficoManagedBean.graficoClientes}">
+					<div id="containerCli" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+				</h:panelGroup>
+
+				<h:panelGroup id="dados">
+			    	<h:inputHidden id="dadosGrafico" value="#{graficoManagedBean.dados}"/>
+			    	<h:inputHidden id="meses" value="#{graficoManagedBean.meses}"/>
+			    	<h:inputHidden id="dadoCliente" value="#{graficoManagedBean.clientes}"/>
+			    	<h:inputHidden id="faturamento" value="#{graficoManagedBean.faturamento}"/>
+			    	<h:inputHidden id="drilldown" value="#{graficoManagedBean.drilldown}"/>
+				</h:panelGroup>
+			    
+			    
+		    </div>
+	  	</div>
+	</h:form>
+  </h:body>
+</html>
+
+

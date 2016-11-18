@@ -1,0 +1,70 @@
+.backgroundPesquisa{
+	background-color: #696969;
+	width: 100%;
+	padding: 0.5em;
+}
+
+.tudo{
+	width: 80%;
+	display: table;
+}
+.divEsquerda{
+	float: left;
+	width: 25%;
+}
+.divDireita{
+	float: right;
+	width: 70%;
+	margin-left: 1em;
+}
+
+.divDadoscomanda{
+	float: left;
+	width: 100%;
+}
+.divComanda{
+	width: 100%;
+	float: right;
+	background-color: #EEEEEE;
+	padding: 0.5em;
+	border-radius: 0.5em;
+}
+
+.divPagamento{
+	float: right;
+	width: 25%;
+}
+
+.perfilResumido{
+	float: left;
+	width: 50%;
+}
+.btnVoltar{
+	float: right;
+}
+
+.bottom{
+	position: relative; 
+	bottom:0;
+}
+
+.menuSuperior active{
+	background-color: #3ac0ff !important;
+}
+
+.centralizar{
+	width: 100%;
+	align-items: center;
+	text-align: justify;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+/*tbody {
+	display: block; 
+	width: 100%;
+	height: 250px;
+ 	overflow-y: auto;
+}*/

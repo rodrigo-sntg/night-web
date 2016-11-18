@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ct="http://rodrigo.com/facelets">
+<h:head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro Produto</title>
+  <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" type="text/css" href="lib/semantic/dist/semantic.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+  <script src="lib/jquery-1.3.2.min.js"></script>
+  <script src="lib/semantic/dist/semantic.min.js"></script>
+  <script src="js/interface.js"></script>
+<style type="text/css">
+
+</style>
+
+  <script type="text/javascript">
+
+
+  $( document ).ready(function() {
+
+    $('.ui.dropdown').dropdown();
+    $('.ui.checkbox').checkbox();
+//     $("#check").checkbox();
+    
+   // $('.ui.modal').modal('setting', 'closable', true).modal('show');
+     $('#modalInserir').modal({
+       blurring: true
+     });  
+    
+});
+
+
+  </script>
+<style type="text/css">
+    @media only screen and (max-width: 800px) {
+        .myMenu {
+            display:none;
+        }
+    }
+
+    @media only screen and (min-width: 800px) {
+        .myMenu {
+            display:block;
+        }
+    }
+  </style>
+  </h:head>
+  <h:body>
+  <ct:header titulo="Produto"/>
+  <div class="faixa"></div>
+  <ct:sidebar/>
+  <div class="conteudo">
+  
+  <div class="ui raised very padded text container segment">
+    <div class="ui stackable one column grid">
+          <div class="column">
+            <h:form class="ui form">
+              <h2 class="ui dividing header">Produto</h2>
+<div class="one field">
+              <div class="ui grid">
+                <div class="ten wide column">
+                  <div class="field">
+                    <label>Nome Item</label>
+                    <h:inputText name="itemEstoque[nomeItem]" value="#{itemConsumoManagedBean.item.nomeItem}" placeholder="Nome Item" type="text" />
+                  </div>
+                </div>
+                <div class="six wide column">
+                  <div class="field">
+                  	<label>Código</label>
+                  	<div class="ui search">
+					  <div class="ui icon input">
+					  	<h:panelGroup rendered="#{itemConsumoManagedBean.item.id eq 0}">
+						    <h:inputText styleClass="prompt" value="#{itemConsumoManagedBean.item.id}" placeholder="# sei lá" type="text"/>
+					  	</h:panelGroup>
+					  	<h:panelGroup rendered="#{itemConsumoManagedBean.item.id ne 0}">
+						    <h:inputText class="prompt" disabled="true" value="#{itemConsumoManagedBean.item.id}" placeholder="# Código" type="text"/>
+					  	</h:panelGroup>					    
+					    <i class="search icon"></i>
+					  </div>
+					  <div class="results"></div>
+					</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <div class="one field">
+                <div class="field">
+                  <label>Descrição</label>
+                  <h:inputText name="produto[descricao]" value="#{itemConsumoManagedBean.item.descricao}" placeholder="Descrição" type="text"/>
+                </div>
+              </div>
+              
+              <div class="two fields">
+                <div class="field">
+                  <label>Categoria</label>
+                  <f:ajax event="change" immediate="false" listener="#{itemConsumoManagedBean.carregaSubCategoria}" render="subCategoria">
+  	                <h:selectOneMenu class="ui fluid dropdown" value="#{itemConsumoManagedBean.item.subCategoria.categoria.id}">
+  	                  <f:selectItem  itemValue="" itemLabel="Categoria"></f:selectItem>
+  	                  <f:selectItems value="#{itemConsumoManagedBean.categorias}" var="c"
+  	                  itemLabel="#{c.nome}" itemValue="#{c.id}" />
+  	                </h:selectOneMenu>
+                  </f:ajax>
+                </div>
+                
+                <h:panelGroup class="field" id="subCategoria">
+  	              <div class="field">
+  	                <label>Sub Categoria</label>
+  	                <h:selectOneMenu value="#{itemConsumoManagedBean.item.subCategoria.id}"  class="ui fluid dropdown" >
+  	                  <f:selectItem  itemValue="" itemLabel="Sub Categoria"></f:selectItem>
+  	                  <f:selectItems value="#{itemConsumoManagedBean.subCategorias}" var="s"
+  	                  itemLabel="#{s.nome}" itemValue="#{s.id}" />
+  	                </h:selectOneMenu>
+  	              </div>
+                </h:panelGroup>
+              </div>
+              <div class="field">
+                <div class="ui toggle checkbox" id="check">
+                  <h:selectBooleanCheckbox value="#{itemConsumoManagedBean.item.cozinha}" />
+                  <label>Feito na cozinha</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui toggle checkbox" id="check">
+                  <h:selectBooleanCheckbox value="#{itemConsumoManagedBean.item.favorito}" />
+                  <label>Favorito</label>
+                </div>
+              </div>
+              <div class="three fields">
+                <div class="field">
+                  <label>Preço de Venda</label>
+                  <h:inputText name="produto[descricao]" value="#{itemConsumoManagedBean.item.precoVenda}" type="text"/>
+                </div>
+                <div class="field">
+                  <label>Lucro</label>
+                  <h:inputText disabled="true" id="lucro" name="produto[descricao]" value="#{itemConsumoManagedBean.item.lucroView}"  type="text"/>
+                </div>
+				<div class="field">
+                  <label>Custo</label>
+                  <h:inputText name="produto[custo]" disabled="true" id="custo" value="#{itemConsumoManagedBean.item.custoTotalView}" type="text"/>
+                </div>
+              </div>
+              <div class="field">
+
+              <h:panelGroup class="field" id="tabela">
+                <table class="ui celled table">
+                  <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>Qtd</th>
+                      <th>Un Medida</th>
+                      <th>Custo</th>
+                      <th>Remover</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ui:repeat value="#{itemConsumoManagedBean.item.listaItemEstoqueConsumo}" var="i">
+                      <tr>
+                        <td>#{i.itemEstoque.nomeItem}</td>
+                        <td>#{i.medida.medidaPorUnidade}</td>
+                        <td>#{i.medida.unidadeMedida}</td>
+                        <td>#{i.custoView}</td>
+                        <td><i class="remove circle icon"></i></td>
+                      </tr>
+                    </ui:repeat>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="5">
+                        <div class="ui right floated pagination menu">
+                          <a class="icon item" onClick="$('#modalInserir').show();return false;">
+                            <i class="add chevron icon"></i>
+                          </a>
+                        </div>
+                      </th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </h:panelGroup>
+              </div>
+              <div class="one field">
+              <div class="field">
+                <h:commandButton styleClass="positive ui button" rendered="#{itemConsumoManagedBean.item.id eq 0}"  binding="#{itemConsumoManagedBean.btsalvar}" 
+                id="btsalvar" value="Salvar" action="#{itemConsumoManagedBean.salvar}"></h:commandButton>
+                <h:commandButton rendered="#{itemConsumoManagedBean.item.id ne 0}" styleClass="positive ui button"  binding="#{itemConsumoManagedBean.btalterar}" 
+                id="btalterar" value="Alterar" action="#{itemConsumoManagedBean.alterar}"></h:commandButton>
+                <h:commandButton rendered="#{itemConsumoManagedBean.item.id ne 0}" styleClass="negative ui button"  binding="#{itemConsumoManagedBean.btexcluir}" 
+                id="btexcluir" value="Remover" action="#{itemConsumoManagedBean.excluir}"></h:commandButton>
+                <h:commandButton styleClass="primary ui button" binding="#{itemConsumoManagedBean.btpesquisar}" 
+                  id="btpesquisar" value="Pesquisar" action="#{itemConsumoManagedBean.consultar}"/>
+                <h:link value="Lista" styleClass="secondary  ui button" outcome="listaProduto"/>
+                <h:link styleClass="submit ui button" outcome="cadastroProduto" value="Novo" />
+              </div>
+            </div>
+              <div class="one field">
+                <div class="field">
+                	
+                </div>
+              </div>
+              
+            <h:panelGroup id="panelModal">
+            
+              <div class="ui modal" id="modalInserir" style="margin-top: -200px;">
+    			    <i class="close icon"></i>
+    			    <div class="header">
+    			      Inserir Item na lista
+    			    </div>
+    			    <div class="content">
+    			      <div class="ui form">
+    			        <div class="three fields">
+    			          <div class="field">
+    			            <label>Item</label>
+    			            <h:selectOneMenu value="#{itemConsumoManagedBean.itemEstoqueConsumo.itemEstoque.id}" class="ui fluid dropdown">
+    			           		<f:selectItem itemValue="" itemLabel=""/>
+    			              	<f:selectItems value="#{itemConsumoManagedBean.listaEstoque}" var="c"
+    				                  itemLabel="#{c.nomeItem}" itemValue="#{c.id}" />
+    				            <f:ajax event="change" update="@this" />
+    			            </h:selectOneMenu>
+    			          </div>
+    			          <div class="field">
+    			            <label>Quantidade</label>
+    			            <h:inputText value="#{itemConsumoManagedBean.itemEstoqueConsumo.medida.medidaPorUnidade}" 
+    			            	name="itemEstoque[quantidadeCritica]" placeholder="#" type="text">
+    			            		<f:ajax event="change" update="@this" />
+    			            	</h:inputText>
+    			          </div>
+    			          <div class="field">
+    			            <label>Un Medida</label>
+    			                <h:selectOneMenu value="#{itemConsumoManagedBean.itemEstoqueConsumo.medida.unidadeMedida}" class="ui fluid dropdown">
+    			                  <f:selectItem itemValue="" itemLabel="un medida"></f:selectItem>
+    			                  <f:selectItem itemValue="ml" itemLabel="ml"></f:selectItem>
+    			                  <f:selectItem itemValue="L" itemLabel="L"></f:selectItem>
+    			                  <f:selectItem itemValue="g" itemLabel="g"></f:selectItem>
+    			                  <f:selectItem itemValue="mg" itemLabel="mg"></f:selectItem>
+    			                  <f:selectItem itemValue="kg" itemLabel="Kg"></f:selectItem>
+    			                  <f:selectItem itemValue="un" itemLabel="un"></f:selectItem>
+    			                  <f:ajax event="change" update="@this tabela" />
+    			                </h:selectOneMenu>
+    			          </div>
+    			        </div>
+    			    	<div class="actions">
+    			      	<div class="ui button" onClick="$('.ui.modal').hide();return false;">Cancel</div>
+    			      		<h:commandButton styleClass="positive ui button"  
+    			        			value="Adicionar" onclick="$('.ui.modal').hide();" action="#{itemConsumoManagedBean.inserirItemLista}">
+    			        			<f:ajax render="@this tabela custo lucro panelModal" />
+    			        			</h:commandButton>
+    			    	</div>
+    			      </div>
+    			    </div>
+    			  </div>
+          </h:panelGroup>
+              <h:message style="color:red;display:block;" for="btsalvar"></h:message>
+            </h:form>
+          </div>
+        </div>
+  </div>
+</div>
+  
+
+
+
+</h:body>
+</html>
+
+

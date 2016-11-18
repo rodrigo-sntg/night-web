@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente</title>
+    <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="lib/semantic/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+  <script src="lib/semantic/examples/assets/library/jquery.min.js"></script>
+  <script src="lib/semantic/dist/semantic.min.js"></script>
+
+    <script type="text/javascript">
+
+
+    $( document ).ready(function() {
+
+      $('.ui.checkbox').checkbox();
+
+
+  });
+
+
+    </script>
+  </head>
+  <body>
+  <header>
+
+  </header>
+    <div class="ui raised very padded text container segment">
+      <h3 class="ui dividing header">Cliente</h3>
+      <div class="ui one column stackable center aligned page grid">
+         <div class="column twelve wide">
+          <div class="ui card ">
+            <div class="image">
+              <img src="img/avatar/placeholder_avatar.jpg">
+            </div>
+            <div class="content">
+              <a class="header" href="rodrigo.html">Rodrigo Santiago</a>
+            <div class="meta">
+              <span class="date">26 anos</span>
+            </div>
+            </div>
+
+          </div>
+
+
+
+          <form class="ui form">
+            <h4 class="ui dividing header">Comanda</h4>
+
+<div class="ui grid">
+              <div class="ten wide column">
+                <div class="field">
+                  <input name="comanda[numero]" placeholder="Comanda" type="text">
+                </div>
+              </div>
+              <div class="six wide column">
+                <div class="field ">
+                  <div class="inline field ">
+                    <div class="ui toggle checkbox" style="margin-top: 7px;">
+                      <input class="hidden" tabindex="0" type="checkbox">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+

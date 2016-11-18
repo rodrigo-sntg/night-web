@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+
+    <script type="text/javascript">
+		function showMenu(){
+			var box = $('.side-menu');
+			if (box.hasClass('hidden')) {
+			  	box.removeClass('hidden');
+		   		box.removeClass('visuallyhidden');
+			} else {
+			  box.addClass('visuallyhidden');
+			  box.addClass('hidden');
+			}
+		}
+    </script>
+</h:head>
+<h:body>
+	<ui:composition>
+		<div class="topo">
+		  <div class="head-container">
+		      <div style="position: absolute;left: 0;top: 0; height: 2px; width: 100%;">
+		        <div style="height: 100%; display: none; width: 10%;" class="lv-progress-bar"></div>
+		      </div>
+		      <div class="head-content">
+		        <div class="table height-100">
+		          <div  class="table-cell height-100 vertical-middle lv-btn" onclick="showMenu()" role="button" tabindex="0">
+		            <div class="contrast-list pointer inline-block"><i class="content big icon"></i></div>
+		          </div>
+		          <div class="table-cell vertical-middle height-100 width-100 white dash-title">
+		            <div class="title-wrap-index">
+		              <translate class="">#{titulo}</translate>
+		            </div>
+		          </div>
+		          <div class="table-cell vertical-middle">
+		            <div style="visibility: visible; cursor:default" title="date: 2016.10.25-14:59:16 V-17.36" class="nowrap padding-5 version transparent"></div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+	    </div>
+	</ui:composition>
+</h:body>
+</html>
+
+

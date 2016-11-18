@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ct="http://rodrigo.com/facelets">
+<h:head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista Produto</title>
+  <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" type="text/css" href="lib/semantic/dist/semantic.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+  <script src="lib/semantic/examples/assets/library/jquery.min.js"></script>
+  <script src="lib/semantic/dist/semantic.min.js"></script>
+  <script src="js/list.js"></script>
+  <script src="js/interface.js"></script>
+
+
+  <script type="text/javascript">
+
+
+  $( document ).ready(function() {
+
+    $('.ui.dropdown').dropdown();
+    $('.ui.checkbox').checkbox();
+    
+    var options = {
+            valueNames: [ 'name']
+          };
+
+          var userList = new List('users', options);
+  });
+
+  </script>
+<style type="text/css">
+    @media only screen and (max-width: 800px) {
+        .myMenu {
+            display:none;
+        }
+    }
+
+    @media only screen and (min-width: 800px) {
+        .myMenu {
+            display:block;
+        }
+    }
+  </style>
+  </h:head>
+  <h:body>
+  <header>
+  
+  </header>
+  <ct:header titulo="Lista Produto"/>
+  <div class="faixa"></div>
+  <ct:sidebar/>
+  <div class="conteudo">
+
+  <div class="ui raised very padded text container segment">
+    <h3 class="ui dividing header">Lista Produto</h3>
+    <div id="users">
+      <div class="one field">
+        <div class="field">
+          <input class="search" style="width:100%;float:left;" placeholder="Filtro por Nome" />
+        </div>
+      </div>
+
+  <h:form>
+    <table class="ui selectable celled table">
+          <thead>
+            <tr>
+              <th class="sort" data-sort="name">Item</th>
+              <th>Preço Venda</th>
+              <th>Custo</th>
+              <th>Detalhes</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <ui:repeat value="#{itemConsumoManagedBean.listaItens}" var="item">
+          
+              <tr class="positive">
+                <td class="name">#{item.nomeItem}</td>
+                    <td>#{item.precoVendaView}</td>
+                    <td>R$ #{item.custoTotalView}</td>
+                    <td class="center aligned">
+                      <h:link outcome="cadastroProduto">
+                      <i class="edit icon "/>
+                    <f:param name="id" value="#{item.id}" />
+                </h:link>
+                    </td>
+            </tr>
+        </ui:repeat>
+          </tbody>
+        </table>
+        <h:link styleClass="ui circular add icon button right floated"  outcome="cadastroProduto">
+        <i class="add icon"></i>
+    </h:link>
+  </h:form>
+    </div>
+  </div>
+  </div>
+</h:body>
+</html>

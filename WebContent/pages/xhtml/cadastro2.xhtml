@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+  <h:head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cadastro Cliente</title>
+    <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="lib/semantic/dist/semantic.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/comanda2.css"/>
+    
+    
+
+    <script type="text/javascript"  src="lib/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript"  src="lib/semantic.min.js"></script>
+    
+    <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/jquery-mask.js"></script>
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
+    
+    
+<style type="text/css">
+</style>
+
+  <script type="text/javascript">
+
+
+  $( document ).ready(function() {
+    $("#dataNascimento").mask("99/99/9999");
+    $(".telefone").mask("(99) 99999-9999");
+    $(".cpf").mask("999.999.999-99");
+    $(".rg").mask("99.999.999-9");
+    
+    $('.ui.dropdown').dropdown();
+    $('.ui.checkbox').checkbox();
+
+    var content = [{
+          title: 'Horse',
+          description: 'An Animal',
+        },{
+          title: 'Cow',
+          description: 'Another Animal',
+        }];
+    $('.ui.search')
+      .search({
+        source : content,
+        searchFields   : [
+          'title'
+        ],
+        searchFullText: false
+      });
+    
+    
+    jQuery("input.telefone")
+    .mask("(99) 9999-9999?9")
+    .focusout(function (event) {  
+        var target, phone, element;  
+        target = (event.currentTarget) ? event.currentTarget : event.srcElement;  
+        phone = target.value.replace(/\D/g, '');
+        element = $(target);  
+        element.unmask();  
+        if(phone.length > 10) {  
+            element.mask("(99) 99999-999?9");  
+        } else {  
+            element.mask("(99) 9999-9999?9");  
+        }  
+    });
+    
+});
+
+  
+  
+
+
+  </script>
+<style type="text/css">
+    @media only screen and (max-width: 800px) {
+        .myMenu {
+            display:none;
+        }
+    }
+
+    @media only screen and (min-width: 800px) {
+        .myMenu {
+            display:block;
+        }
+    }
+  </style>
+  </h:head>
+  <h:body>
+  <header>
+  
+  </header>
+  <div class="myMenu">
+    <div class="ui left fixed vertical menu">
+      <div class="item">
+        <img class="ui image" src="img/sgcn.png"/>
+      </div>
+      <a class="item" onclick="document.location='cadastro.xhtml'">Cliente</a>
+      <a class="item" onclick="document.location='listaProduto.xhtml'">Lista Produto</a>
+      <a class="item" onclick="document.location='listaEstoque.xhtml'">Lista Estoque</a>
+      <a class="item" onclick="document.location='comanda.xhtml'">Comanda</a>
+    </div>
+  </div>
+  <div class="ui raised very padded text container segment">
+    <div class="ui stackable one column grid">
+      <div class="column">
+        <h:form class="ui form" prependId="false">
+        <h4 class="ui dividing header">Dados</h4>
+	   	
+        <div class="fields">
+            <div class="twelve wide field">
+              <label>Nome</label>
+              <h:inputText name="cliente.nome" value="#{clienteManagedBean.cliente.nome}" placeholder="Nome" type="text"/>
+            </div>
+            <div class="four wide field">
+              <label>Data Nascimento</label>
+              <div class="ui calendar" >
+                <div class="ui input left icon">
+                  <i class="calendar icon"></i>
+                  	<h:inputText styleClass="date" id="dataNascimento"  value="#{clienteManagedBean.cliente.dtNascimento}">  
+					   <f:convertDateTime timeZone="GMT-03:00" locale="pt_BR" pattern="dd/MM/yyyy"/>  
+					</h:inputText>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="three fields">
+          <div class="field">
+            <label>CPF</label>
+            <h:inputText styleClass="cpf" name="cliente.cpf" required="true" value="#{clienteManagedBean.cpf}" placeholder="Rua" type="text"/>
+          </div>
+          <div class="field">
+            <label>RG</label>
+            <h:inputText styleClass="rg"  name="cliente.rg" value="#{clienteManagedBean.rg}" placeholder="Apt #" type="text"/>
+          </div>
+          <div class="field">
+            <label>Telefone</label>
+            <h:inputText styleClass="telefone" name="cliente.telefone" value="#{clienteManagedBean.telefone}" placeholder="Apt #" type="text"/>
+          </div>
+        </div>
+
+
+        <h4 class="ui dividing header">Endereço</h4>
+        <div class="field">
+          <div class="fields">
+            <div class="twelve wide field">
+	          <label>Rua</label>
+              <h:inputText name="cliente.endereco.rua" value="#{clienteManagedBean.cliente.endereco.rua}" placeholder="Rua" type="text"/>
+            </div>
+            <div class="four wide field">
+            	<label>Complemento</label>
+              <h:inputText name="cliente.endereco.complemento" value="#{clienteManagedBean.cliente.endereco.complemento}" placeholder="Apt #" type="text"/>
+            </div>
+          </div>
+        </div>
+        <div class="fields">
+          <div class="eight wide field">
+            <label>Cidade</label>
+            <h:inputText name="cliente.endereco.cidade" value="#{clienteManagedBean.cliente.endereco.cidade}" placeholder="cidade" type="text"/>
+          </div>
+          <div class="eight wide field">
+            <label>Estado</label>
+            <h:selectOneMenu value="#{clienteManagedBean.cliente.endereco.estado}" class="ui fluid dropdown">
+              <f:selectItem itemValue="" itemLabel=""/>
+              <f:selectItem itemValue="ac" itemLabel="Acre"/>
+              <f:selectItem itemValue="al" itemLabel="Alagoas"/>
+              <f:selectItem itemValue="am" itemLabel="Amazonas"/>
+              <f:selectItem itemValue="ap" itemLabel="Amapá"/>
+              <f:selectItem itemValue="ba" itemLabel="Bahia"/>
+              <f:selectItem itemValue="ce" itemLabel="Ceará"/>
+              <f:selectItem itemValue="df" itemLabel="Distrito Federal"/>
+              <f:selectItem itemValue="es" itemLabel="Espírito Santo"/>
+              <f:selectItem itemValue="go" itemLabel="Goiás"/>
+              <f:selectItem itemValue="ma" itemLabel="Maranhão"/>
+              <f:selectItem itemValue="mt" itemLabel="Mato Grosso"/>
+              <f:selectItem itemValue="ms" itemLabel="Mato Grosso do Sul"/>
+              <f:selectItem itemValue="mg" itemLabel="Minas Gerais"/>
+              <f:selectItem itemValue="pa" itemLabel="Pará"/>
+              <f:selectItem itemValue="pb" itemLabel="Paraíba"/>
+              <f:selectItem itemValue="pr" itemLabel="Paraná"/>
+              <f:selectItem itemValue="pe" itemLabel="Pernambuco"/>
+              <f:selectItem itemValue="pi" itemLabel="Piauí"/>
+              <f:selectItem itemValue="rj" itemLabel="Rio de Janeiro"/>
+              <f:selectItem itemValue="rn" itemLabel="Rio Grande do Norte"/>
+              <f:selectItem itemValue="ro" itemLabel="Rondônia"/>
+              <f:selectItem itemValue="rs" itemLabel="Rio Grande do Sul"/>
+              <f:selectItem itemValue="rr" itemLabel="Roraima"/>
+              <f:selectItem itemValue="sc" itemLabel="Santa Catarina"/>
+              <f:selectItem itemValue="se" itemLabel="Sergipe"/>
+              <f:selectItem itemValue="sp" itemLabel="São Paulo"/>
+              <f:selectItem itemValue="to" itemLabel="Tocantins"/>
+            </h:selectOneMenu>
+          </div>
+        </div>
+	
+
+	        <h:commandButton styleClass="positive  ui button" rendered="#{clienteManagedBean.cliente.id eq 0}" binding="#{clienteManagedBean.btsalvar}" 
+	        	id="btsalvar" value="Salvar" action="#{clienteManagedBean.salvar}"></h:commandButton>
+	        <h:commandButton styleClass="primary  ui button" binding="#{clienteManagedBean.btpesquisar}" 
+	        	id="btpesquisar" value="Pesquisar" action="#{clienteManagedBean.consultar}"></h:commandButton>
+	        <h:commandButton styleClass="positive  ui button" binding="#{clienteManagedBean.btalterar}"  rendered="#{clienteManagedBean.cliente.id ne 0}" value="Alterar" action="#{clienteManagedBean.alterar}" 
+	        	id="btalterar" ></h:commandButton>
+	        <h:commandButton styleClass="negative  ui button" rendered="#{clienteManagedBean.cliente.id ne 0}" value="Inativar" action="#{clienteManagedBean.excluir}" 
+	        	id="btexcluir" ></h:commandButton>
+	        <h:link styleClass="submit ui button" outcome="cadastro" value="Novo" />
+	        
+	        <h:panelGroup class="field" rendered="#{clienteManagedBean.cliente.id ne 0}" id="comandaPanel" style="margin-top:10px">
+		        <h4 style="margin-top:10px" class="ui dividing header">Comanda</h4>
+		        <div class="field">
+			        <div class="four wide field">
+		            	<label>Número</label>
+		              <h:inputText value="#{clienteManagedBean.comanda.numeroComanda}" placeholder="#" type="text"/>
+		            </div>
+		            
+		            <h:commandButton styleClass="primary ui button" binding="#{clienteManagedBean.btabrir}" 
+		        	id="btabrir" value="Abrir Comanda" action="#{clienteManagedBean.abrirComanda}"></h:commandButton>
+		        </div>	        
+	        </h:panelGroup>
+	        
+	        <h:commandButton styleClass="primary ui button"  
+		        	value="TESTE" action="#{clienteManagedBean.teste}"></h:commandButton>
+	        
+	        <h:message style="color:red;display:block;" for="btsalvar"></h:message>
+	        <h:message style="color:red;display:block;" for="btpesquisar"></h:message>
+	        <h:message style="color:red;display:block;" for="btexcluir"></h:message>
+	        <h:message style="color:red;display:block;" for="btalterar"></h:message>
+      </h:form>
+      </div>
+    </div>
+  </div>
+</h:body>
+</html>
+
+

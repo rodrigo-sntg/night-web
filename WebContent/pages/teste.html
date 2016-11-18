@@ -1,0 +1,124 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro Estoque</title>
+  <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="lib/semantic/dist/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+  <script src="lib/semantic/examples/assets/library/jquery.min.js"></script>
+  <script src="lib/semantic/dist/semantic.min.js"></script>
+<script src="http://listjs.com/no-cdn/list.js"></script>
+
+
+  <script type="text/javascript">
+
+
+  $( document ).ready(function() {
+
+    $('.ui.dropdown').dropdown();
+    $('.ui.checkbox').checkbox();
+
+    var content = [{
+          title: 'Horse',
+          description: 'An Animal',
+        },{
+          title: 'Cow',
+          description: 'Another Animal',
+        }];
+    $('.ui.search')
+      .search({
+        source : content,
+        searchFields   : [
+          'title'
+        ],
+        searchFullText: false
+      });
+
+      var options = {
+        valueNames: [ 'name']
+      };
+
+      var userList = new List('users', options);
+
+      $('.basic.modal').modal('setting', 'closable', false).modal('show');
+      $('.ui.modal').modal();
+  });
+
+
+
+
+  </script>
+</head>
+<body>
+<header>
+
+</header>
+
+  <div class="ui raised very padded text container segment">
+    <h3 class="ui dividing header">Lista Estoque</h3>
+    <div id="users">
+      <div class="one field">
+        <div class="field">
+          <input class="search" style="width:100%;float:left;" placeholder="Filtro" />
+        </div>
+      </div>
+
+
+      <table class="ui selectable celled table">
+        <thead>
+          <tr>
+            <th class="sort" data-sort="name">Item</th>
+            <th>Quantidade</th>
+            <th>Valor Un</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr class="positive">
+            <td class="name">Skol Beats Spirit 269ml</td>
+            <td>200</td>
+            <td>R$ 3,10</td>
+          </tr>
+          <tr class="positive">
+            <td class="name">Skol beats spirit 313ml</td>
+            <td>100</td>
+            <td>R$ 3,10</td>
+          </tr>
+          <tr class="warning">
+            <td class="name">Coca Cola 600ml</td>
+            <td>80</td>
+            <td>R$ 3,10</td>
+          </tr>
+          <tr class="warning">
+            <td class="name">Coca Cola 380ml</td>
+            <td>40</td>
+            <td>R$ 3,10</td>
+          </tr>
+          <tr class="positive">
+            <td class="name">Coca Cola 2l</td>
+            <td>200</td>
+            <td>R$ 3,10</td>
+          </tr>
+          <tr class="negative">
+            <td class="name">Red Bull 300ml</td>
+            <td>10</td>
+            <td>R$ 3,10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>
+
+

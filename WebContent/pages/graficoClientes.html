@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente</title>
+    <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="lib/semantic/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script src="lib/semantic/examples/assets/library/jquery.min.js"></script>
+    <script src="lib/semantic/dist/semantic.min.js"></script>
+
+    <script src="js/highcharts.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/drilldown.js"></script>
+
+    <script type="text/javascript">
+
+
+    $( document ).ready(function() {
+
+      $(function () {
+    // Create the chart
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Faturamento Mensal 2016'
+        },
+        subtitle: {
+            text: 'Clique nos meses para detalhar por dia'
+        },
+        xAxis: {
+            type: 'category'
+        },
+        yAxis: {
+            title: {
+                text: 'Faturamento'
+            }
+
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: 'R$ {point.y:.2f}'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: R$ <b>{point.y:.2f}</b> de faturamento<br/>'
+        },
+
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'Janeiro',
+                y: 35000,
+                drilldown: 'Janeiro'
+            }, {
+                name: 'Fevereiro',
+                y: 29000,
+                drilldown: 'Fevereiro'
+            }, {
+                name: 'Março',
+                y: 26000,
+                drilldown: 'Março'
+            }, {
+                name: 'Abril',
+                y: 27560,
+                drilldown: 'Abril'
+            }, {
+                name: 'Maio',
+                y: 22300,
+                drilldown: 'Maio'
+            }, {
+                name: 'Junho',
+                y: 20000,
+                drilldown: 'Junho'
+            }]
+        }],
+        drilldown: {
+            series: [{
+                name: 'Janeiro',
+                id: 'Janeiro',
+                data: [{name:'Semana um',
+                        y:10000,
+                        drilldown:'Janeiro_um'}
+                    ,
+                    [
+                        'Semana dois',
+                        10000
+                    ],
+                    [
+                        'Semana tres',
+                        6000
+                    ],
+                    [
+                        'Semana quatro',
+                        6000
+                    ]
+                ]
+            }, {
+                name: 'Fevereiro',
+                id: 'Fevereiro',
+                data: [
+                    [
+                        'Semana um',
+                        2.76
+                    ],
+                    [
+                        'Semana dois',
+                        2.32
+                    ],
+                    [
+                        'Semana tres',
+                        2.31
+                    ],
+                    [
+                        'Semana quatro',
+                        1.27
+                    ]
+                ]
+            }, {
+                name: 'Março',
+                id: 'Março',
+                data: [
+                    [
+                        'Semana um',
+                        2.76
+                    ],
+                    [
+                        'Semana dois',
+                        2.32
+                    ],
+                    [
+                        'Semana tres',
+                        2.31
+                    ],
+                    [
+                        'Semana quatro',
+                        1.27
+                    ]
+                ]
+            }, {
+                name: 'Abril',
+                id: 'Abril',
+                data: [
+                    [
+                        'Semana um',
+                        2.76
+                    ],
+                    [
+                        'Semana dois',
+                        2.32
+                    ],
+                    [
+                        'Semana tres',
+                        2.31
+                    ],
+                    [
+                        'Semana quatro',
+                        1.27
+                    ]
+                ]
+            }, {
+                name: 'Maio',
+                id: 'Maio',
+                data: [
+                    [
+                        'Semana um',
+                        2.76
+                    ],
+                    [
+                        'Semana dois',
+                        2.32
+                    ],
+                    [
+                        'Semana tres',
+                        2.31
+                    ],
+                    [
+                        'Semana quatro',
+                        1.27
+                    ]
+                ]
+            }, {
+                name: 'Junho',
+                id: 'Junho',
+                data: [
+                    [
+                        'Semana um',
+                        2.76
+                    ],
+                    [
+                        'Semana dois',
+                        2.32
+                    ],
+                    [
+                        'Semana tres',
+                        2.31
+                    ],
+                    [
+                        'Semana quatro',
+                        1.27
+                    ]
+                ]
+            },{
+                name: 'Janeiro Semana Um',
+                id: 'Janeiro_um',
+                data: [
+                    [
+                        '1',
+                        3000
+                    ],
+                    [
+                        '2',
+                        3000
+                    ],
+                    [
+                        '3',
+                        2000
+                    ],
+                    [
+                        '4',
+                        3000
+                    ],
+                    [
+                        '5',
+                        2000
+                    ],
+                    [
+                        '6',
+                        4000
+                    ],
+                    [
+                        '7',
+                        3000
+                    ]
+                ]
+            }]
+        }
+    });
+});
+
+
+  });
+
+
+    </script>
+  </head>
+  <body>
+  <header>
+
+  </header>
+    <div class="ui raised very padded text container segment">
+      <h3 class="ui dividing header">Faturamento Mensal</h3>
+      <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </div>
+  </body>
+</html>
+
+

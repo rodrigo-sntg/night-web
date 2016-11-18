@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	
+	<script src="lib/jquery-1.3.2.min.js"></script>
+	<script src="lib/semantic/dist//semantic.min.js"></script>
+	<script src="lib/jquery-ui-1.7.2.custom.min.js"></script>
+	<script src="lib/jquery.cookie.js"></script>
+	<script src="js/comanda.js"></script>
+	
+    <link rel="stylesheet" type="text/css" href="lib/semantic/dist/semantic.min.css">
+	<link rel="stylesheet" type="text/css" href="css/comanda.css">
+
+	<title>COZINHA</title>
+</head>
+<body>
+<div class="ui raised very padded text container segment">
+	<div class="centralizar">
+	<div class="tudo">
+		<h1 class="ui dividing header">COZINHA</h1>
+		<div class="quadros">
+			<h4 class="ui dividing header">PENDENTE</h4>
+			<div class="ui divided items">
+				<div class="item itemToDo itemDrag">
+					<div class="content">
+						<h3>Mex Picanha</h3>
+						<div class="description">
+							<b>Ingredientes:</b>
+							<p>Hamburguer 200g, Molho especial, Pimenta</p>
+						</div>
+						<div class="extra">
+							<div class="ui feed">
+								<div class="event">
+									<div class="label">
+					      				<img src="img/avatar/cozinha02.jpg" class="cozinheiro">
+					    			</div>
+					    			<div class="label">
+					      				<img src="img/avatar/cozinha.jpg" class="cozinheiro">
+					    			</div>
+					    		</div>
+				    		</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="quadros">
+			<h4 class="ui dividing header">FAZENDO</h4>
+			<div class="ui divided items">
+				<div class="item itemToDo itemDrag">
+					<div class="content">
+						<h3>Fritas c/ Bacon</h3>
+						<div class="description">
+							<b>Ingredientes:</b>
+							<p>Hamburguer 200g, Molho especial, Pimenta</p>
+						</div>
+						<div class="extra">
+							<div class="ui feed">
+								<div class="event">
+									<div class="label">
+					      				<img src="img/avatar/cozinha02.jpg">
+					    			</div>
+					    		</div>
+				    		</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="quadros">
+			<h4 class="ui dividing header">PRONTO</h4>
+			<div class="ui divided items">
+				<div class="item itemToDo itemDrag">
+					<div class="content">
+						<h3>Burg Maneiro</h3>
+						<div class="description">
+							<b>Ingredientes:</b>
+							<p>2 Hamburguer 200g, Batata frita, Molho de pimenta, Molho especial</p>
+						</div>
+						<div class="extra">
+							<div class="ui feed">
+								<div class="event">
+									<div class="label">
+					      				<img src="img/avatar/cozinha.jpg">
+					    			</div>
+					    		</div>
+				    		</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$(".quadros").sortable({
+					connectWith: ['.quadros'],
+					placeholder: 'dragHelper',
+					scroll: true,
+					revert: true
+				});
+			});
+		</script>
+
+	</div>
+</div>
+</div>
+</body>
+</html>

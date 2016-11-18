@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	
+	<script src="lib/jquery-1.3.2.js"></script>
+	<script src="lib/semantic/dist/semantic.min.js"></script>
+	<script src="js/comanda.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="lib/semantic/dist/semantic.min.css">
+	<link rel="stylesheet" type="text/css" href="css/comanda.css">
+
+
+	<title>Comanda</title>
+	<script type="text/javascript">
+		$('ui.dropdown').dropdown();
+		function somar(){
+			var valor = parseFloat($("#valor").val().replace(/,/g, "."))|| 0;
+			var couver = parseFloat($("#couver").val().replace(/,/g, "."))  || 0;
+			var taxaServico = parseFloat($("#taxaServico").val().replace(/,/g, "."))|| 0;
+			var desconto = parseFloat($("#desconto").val().replace(/,/g, "."))|| 0;
+			var vTotal = valor + couver - desconto;
+			if(taxaServico != 0){
+				taxaServico = 1 + taxaServico/100;
+				vTotal = vTotal * taxaServico;
+			}
+			$("#total").val(vTotal) ;
+		}
+
+		function verificaTroco(){
+			if($("#dinheiro").is(':checked')){
+				$("#valorPagoDiv").show();
+				$("#trocoDiv").show();
+			}else{
+				$("#valorPagoDiv").hide();
+				$("#trocoDiv").hide();
+			}
+		}
+
+		function valorTroco(){
+			var valor = parseFloat($("#total").val().replace(/,/g, "."))|| 0;
+			var valorPago = parseFloat($("#valorPago").val().replace(/,/g, "."))  || 0;
+			var vTroco = valorPago - valor;
+			$("#troco").val(vTroco) ;
+		}
+	</script>
+</head>
+<body>
+
+<div class="ui three top attached steps">
+	<div class="menuSuperior active step" id="ativarPrimeiraAba" onClick="ativarAba('#primeiraAba');">
+		<i class="search icon"></i>
+		<div class="content">
+			<div class="title">Pesquisar</div>
+			<div class="description">Pesquisar Dados</div>
+		</div>
+	</div>
+	<div class="menuSuperior step" id="ativarSegundaAba" onClick="ativarAba('#segundaAba');">
+		<i class="add user icon"></i>
+		<div class="content">
+			<div class="title">Cadastrar/Alterar Dados</div>
+			<div class="description">Cadastro/Alteração de dados</div>
+		</div>
+	</div>
+	<div class="menuSuperior step" id="ativarTerceiraAba" onClick="ativarAba('#terceiraAba');">
+		<i class="payment icon"></i>
+		<div class="content">
+			<div class="title">Abrir/Fechar comanda</div>
+			<div class="description">Abir ou fechar comanda</div>
+		</div>
+	</div>
+</div>
+
+<!-- 1º ABA -->
+<div class="ui attached segment centralizar abas" id="primeiraAba">
+	<div class="backgroundPesquisa centralizar">
+		<div class="ui massive icon input">
+		  	<input type="text" placeholder="COMANDA / CPF / NOME" id="campoPesquisa" 
+		  		onkeypress="return pesquisar(event);" size="70%">
+			<i class="search icon"></i>
+		</div>
+	</div>
+
+	<div class="tudo" id="contato" style="display: none; margin-top: 1em;">
+	  	<div class="divEsquerda">
+			<div class="ui special cards">
+				<div class="card">
+					<div class="blurring dimmable image">
+					  	<div class="ui dimmer">
+					    	<div class="content">
+					      		<div class="center">
+					        		<div class="ui inverted button">Alterar Foto</div>
+					      		</div>
+					    	</div>
+					  	</div>
+						<img src="foto.jpg">
+					</div>
+					<div class="content">
+						<a class="header">Bianca</a>
+					  	<div class="meta">
+					    	<span class="date">18/06/1951</span>
+					  	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="divDireita">
+			<form class="ui form">
+				<h4 class="ui dividing header">Dados Pessoais</h4>
+				<div class="field">
+					<label>Nome</label>
+					<div class="two fields">
+						<div class="field">
+							<input type="text" placeholder="Primeiro Name">
+						</div>
+						<div class="field">
+							<input type="text" placeholder="Sobrenome">
+						</div>
+					</div>
+				</div>
+
+
+				<div class="three fields">
+					<div class="field">
+						<label>Data de Nascimento</label>
+						<input type="text" placeholder="00/00/0000">
+					</div>
+					<div class="field">
+						<label>CPF</label>
+						<input type="text" placeholder="000.000.000-00">
+					</div>
+					<div class="field">
+						<label>RG</label>
+						<input type="text" placeholder="00.000.000-0">
+					</div>
+				</div>
+				<div class="two fields">
+	              	<div class="field">
+	              	<label>Sexo</label>
+	                <select class="ui fluid dropdown">
+	                  <option value="Feminino">Feminino</option>
+	                  <option value="Masculino">Masculino</option>
+	                </select>
+	              	</div>
+
+            	</div>
+			</form>
+		</div>     
+	</div>
+</div>
+		
+
+<!-- 2º ABA -->
+<div class="ui attached segment centralizar abas" id="segundaAba">
+  	<div class="tudo">
+		<h2 class="ui dividing header">Cadastrar cliente</h2>
+	  	<div class="divEsquerda">
+			<div class="ui special cards">
+				<div class="card">
+					<div class="blurring dimmable image">
+					  	<div class="ui dimmer">
+					    	<div class="content">
+					      		<div class="center">
+					        		<div class="ui inverted button">Alterar Foto</div>
+					      		</div>
+					    	</div>
+					  	</div>
+						<img src="foto.jpg">
+					</div>
+					<div class="content">
+						<a class="header">Bianca</a>
+					  	<div class="meta">
+					    	<span class="date">18/06/1951</span>
+					  	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="divDireita">
+			<form class="ui form">
+				<h4 class="ui dividing header">Dados Pessoais</h4>
+				<div class="field">
+					<label>Nome</label>
+					<div class="two fields">
+						<div class="field">
+							<input type="text" placeholder="Primeiro Name">
+						</div>
+						<div class="field">
+							<input type="text" placeholder="Sobrenome">
+						</div>
+					</div>
+				</div>
+				<div class="three fields">
+					<div class="field">
+						<label>Data de Nascimento</label>
+						<input type="text" placeholder="00/00/0000">
+					</div>
+					<div class="field">
+						<label>CPF</label>
+						<input type="text" placeholder="000.000.000-00">
+					</div>
+					<div class="field">
+						<label>RG</label>
+						<input type="text" placeholder="00.000.000-0">
+					</div>
+				</div>
+				<button class="positive fluid ui button bottom">ABRIR COMANDA</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- 3º ABA -->
+<div class="ui attached segment centralizar abas" id="terceiraAba">
+	<div class="tudo">
+		<h2 class="ui dividing header">Fechar Comanda</h2>
+		
+		<div class="divDadoscomanda">
+			<form class="ui form">
+				<h4 class="ui dividing header">Comanda</h4>
+				<div class="field">
+					<div class="ui toggle checkbox">
+					  	<input type="checkbox" name="public">
+					  	<label>Consumo</label>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui toggle checkbox">
+					  	<input type="checkbox" name="public">
+					  	<label>Nome na lista</label>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui toggle checkbox">
+					  	<input type="checkbox" name="public">
+					  	<label>Antes das 22:00</label>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="divComanda">
+		  	<div class="perfilResumido">
+			  	<h2 class="ui header">
+				  	<img src="foto.jpg">
+				  	<div class="content">
+					    Bianca Castelari
+				    	<div class="sub header">COMANDA Nº 189</div>
+				  	</div>
+				</h2>
+			</div>
+			<div class="btnVoltar">
+				<button class="circular ui icon yellow button" onClick="ativarAba('#primeiraAba');">
+					<i class="icon remove"></i>
+				</button>
+			</div>
+			<table class="ui red table">
+				<thead>
+					<tr>
+						<th>Item</th>
+						<th>Quantidade</th>
+						<th>Valor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+	                	<td>Drink Cuba Libre</td>
+	                  	<td>2</td>
+	                  	<td>R$25,00</td>
+	                </tr>
+	                <tr>
+	                  	<td>Drink sex on the beach</td>
+	                  	<td>1</td>
+	                  	<td>R$25,00</td>
+	                </tr>
+	                <tr>
+	                  	<td>Cerveja hoefgarden</td>
+	                  	<td>2</td>
+	                  	<td>R$50,00</td>
+	                </tr>
+	               	</tr>
+	                  	<td colspan="2" style="text-align: center">
+	                  		TOTAL
+	                  	</td>
+	                  	<td>
+	                  		R$100,00
+	                  	</td>
+	                </tr>
+	            </tbody>
+			</table>
+			<br>
+			<button class="positive fluid ui button" onClick="$('.ui.modal').modal('show');">FECHAR COMANDA</button>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Fechar Comanda
+  </div>
+  <div class="content">
+
+  	<form class="ui form">
+  		<div class="ui grid">
+
+
+			  	<div class="eight wide column">
+			  		<div class="field">
+			          <label>Valor</label>
+			          <input id="valor" name="comanda[valor]" onblur="somar()"  value="55,00" placeholder="Valor" type="text" >
+			        </div>
+			    </div>
+		  		<div class="eight wide column">
+					<div class="field">
+			          <label>Couver</label>
+			          <input id="couver" onblur="somar()" name="comanda[couver]" placeholder="Couver Artístico" type="text" >
+			        </div>
+			    </div>
+			  	<div class="eight wide column">
+				  <div class="field">
+			          <label>Taxa Serviço (%)</label>
+			          <input id="taxaServico" onblur="somar()" name="comanda[taxaServico]" placeholder="Taxa Serviço" type="text" >
+			        </div>
+			  	</div>
+			  	<div class="eight wide column">
+				  	<div class="field">
+			          <label>Desconto</label>
+			          <input id="desconto" onblur="somar()" name="comanda[desconto]" placeholder="Desconto" type="text" >
+			        </div>
+    			</div>
+			  	<div id="valorPagoDiv" class="eight wide column" style="display:none">
+				  	<div class="field">
+			          <label>Valor Pago</label>
+			          <input id="valorPago" onblur="valorTroco()" name="comanda[valorPago]" placeholder="Valor Pago" type="text" >
+			        </div>
+				</div>
+			  	<div id="trocoDiv" class="eight wide column" style="display:none">
+				  	<div class="field">
+			          <label>Troco</label>
+			          <input id="troco" name="comanda[troco]" placeholder="troco" type="text" >
+			        </div>
+				</div>
+
+
+	    		<div class="sixteen wide column"><h3 class="ui dividing header">Pagamento</h3></div>
+	    		
+	    		<div class="six wide column">
+	    			<div class="field">
+	    				<h4 class="ui dividing header">Forma de Pagamento</h4>
+			            <div class="grouped fields">
+						    <div class="field">
+						      <div class="ui radio checkbox">
+						        <input name="meioPagamento" id="debito" onclick="verificaTroco()" checked="checked" type="radio">
+						        <label>Débito</label>
+						      </div>
+						    </div>
+						    <div class="field">
+						      <div class="ui radio checkbox">
+						        <input onclick="verificaTroco()" id="credito" name="meioPagamento" type="radio">
+						        <label>Crédito</label>
+						      </div>
+						    </div>
+						    <div class="field">
+						      <div class="ui radio checkbox">
+						        <input onclick="verificaTroco()" id="dinheiro" name="meioPagamento" type="radio">
+						        <label>Dinheiro</label>
+						      </div>
+						    </div>
+						  </div>
+			        </div>
+	    		</div>
+
+	    		<div class="six wide column">
+	    			<div class="field">
+	    				<h4 class="ui dividing header">Bandeira Cartão</h4>
+			            <div class="grouped fields" style="float:left;padding-right:30px;">
+						    <div class="field">
+						      <div class="ui radio checkbox">
+						        <input name="bandeira" id="debito" onclick="verificaTroco()" checked="checked" type="radio">
+						        <label><i class="big american express icon"></i></label>
+						      </div>
+						    </div>
+						    <div class="field">
+						      <div class="ui radio checkbox">
+						        <input onclick="verificaTroco()" id="credito" name="bandeira" type="radio">
+						        <label><i class="big visa icon"></i></label>
+						      </div>
+						    </div>
+					  	</div>
+					  	<div class="grouped fields" style="float:left;padding-right:30px;">
+						    <div class="field">
+						      <div class="ui radio checkbox">
+						        <input name="bandeira" id="debito" onclick="verificaTroco()" checked="checked" type="radio">
+						        <label><i class="big mastercard icon"></i></label>
+						      </div>
+						    </div>
+						    <div class="field">
+						      <div class="ui radio checkbox">
+						        <input onclick="verificaTroco()" id="credito" name="bandeira" type="radio">
+						        <label><i class="big diners club icon"></i></label>
+						      </div>
+						    </div>
+					  	</div>
+			        </div>
+	    		</div>
+
+	    		<div class="four wide column">
+	    			<div class="field">
+	    				<h4 class="ui dividing header">Bandeira Cartão</h4>
+			          	<input id="total" name="total"  placeholder="Total" type="text" >
+			        </div>
+	    		</div>
+	    		
+
+
+  		</div>
+        
+	</form>
+  </div>
+  <div class="actions">
+    <div class="ui button">Cancel</div>
+    <div class="ui button">OK</div>
+  </div>
+</div>
+
+</body>
+</html>

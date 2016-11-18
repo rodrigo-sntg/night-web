@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ct="http://rodrigo.com/facelets">
+<h:head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro Estoque</title>
+  <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" type="text/css" href="lib/semantic/dist/semantic.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+  <script src="lib/jquery-1.3.2.min.js"></script>
+  <script src="lib/semantic/dist/semantic.min.js"></script>
+  <script src="js/interface.js"></script>
+
+
+  <script type="text/javascript">
+
+  $(function() {
+    // Do any work you want to occur when the DOM is ready here.
+
+    $("#saveButton").click(checkValidation);
+}
+
+
+  $( document ).ready(function() {
+
+    $('.ui.dropdown').dropdown();
+    $('.ui.checkbox').checkbox();
+
+    var content = [{
+          title: 'Horse',
+          description: 'An Animal',
+        },{
+          title: 'Cow',
+          description: 'Another Animal',
+        }];
+    $('.ui.search')
+      .search({
+        source : content,
+        searchFields   : [
+          'title'
+        ],
+        searchFullText: false
+      });
+
+    $('.ui.modal').modal({
+      inverted: false
+    }).modal('show');
+
+
+});
+
+
+
+
+  </script>
+<style type="text/css">
+    @media only screen and (max-width: 800px) {
+        .myMenu {
+            display:none;
+        }
+    }
+
+    @media only screen and (min-width: 800px) {
+        .myMenu {
+            display:block;
+        }
+    }
+  </style>
+  </h:head>
+  <h:body>
+  <header>
+  
+  </header>
+  <ct:header titulo="Item Estoque"/>
+  <div class="faixa"></div>
+  <ct:sidebar/>
+  <div class="conteudo">
+  
+  <div class="ui raised very padded text container segment" >
+    <div class="ui stackable one column grid">
+          <div class="column">
+            <h:form class="ui form">
+            <h:panelGroup rendered="#{estoqueManagedBean.estoque.id eq 0}">
+            	<h3 class="ui dividing header">Item de Estoque</h3>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{estoqueManagedBean.estoque.id ne 0}">
+              <div class="ui dividing right aligned header">
+                <div class="one field">
+               		<h3 class="ui left floated header" style="margin-top:10px">Item de Estoque</h3>
+                  <div class="ui right aligned labeled button bloca" onclick="$('#myModal').show();" tabindex="0">
+                    <div class="ui blue button">
+                      <i class="add icon"></i> Estoque
+                    </div>
+                    <a class="ui basic blue left pointing label" style="border-radius: 0px;">
+                      #{estoqueManagedBean.estoque.qtdEstoque} un
+                    </a>
+                    <a class="ui basic blue label" style="border-radius: 0px;">
+                      R$ #{estoqueManagedBean.estoque.custoTotalEstoqueView}
+                    </a>
+                    <a class="ui basic blue label">
+                      R$ #{estoqueManagedBean.estoque.custoUnitarioView} /un
+                    </a>
+                  </div>
+                </div>
+              </div>
+          </h:panelGroup>
+            <div class="one field">
+              <div class="ui grid">
+                <div class="ten wide column">
+                  <div class="field">
+                    <label>Nome Item</label>
+                    <h:inputText name="itemEstoque[nomeItem]" value="#{estoqueManagedBean.estoque.nomeItem}" placeholder="Nome Item" type="text" />
+                  </div>
+                </div>
+                <div class="six wide column">
+                  <div class="field">
+                  	<label>Código</label>
+                  	<div class="ui search">
+					  <div class="ui icon input">
+					  	<h:panelGroup rendered="#{estoqueManagedBean.estoque.id eq 0}">
+						    <h:inputText styleClass="prompt" value="#{estoqueManagedBean.estoque.id}" placeholder="# sei lá" type="text"/>
+					  	</h:panelGroup>
+					  	<h:panelGroup rendered="#{estoqueManagedBean.estoque.id ne 0}">
+						    <h:inputText class="prompt" disabled="true" value="#{estoqueManagedBean.estoque.id}" placeholder="# Código" type="text"/>
+					  	</h:panelGroup>					    
+					    <i class="search icon"></i>
+					  </div>
+					  <div class="results"></div>
+					</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="one field">
+              <div class="field">
+                <label>Descrição</label>
+                <h:inputText name="itemEstoque[descricao]" value="#{estoqueManagedBean.estoque.descricao}" placeholder="Descrição" type="text"/>
+              </div> 
+            </div>
+            <div class="two fields">
+              <div class="field">
+                <label>Categoria</label>
+                <f:ajax event="change" immediate="false" listener="#{estoqueManagedBean.carregaSubCategoria}" render="subCategoria">
+	                <h:selectOneMenu class="ui fluid dropdown" value="#{estoqueManagedBean.estoque.subCategoria.categoria.id}">
+	                  <f:selectItem  itemValue="" itemLabel="Categoria"></f:selectItem>
+	                  <f:selectItems value="#{estoqueManagedBean.categorias}" var="c"
+	                  itemLabel="#{c.nome}" itemValue="#{c.id}" />
+	                </h:selectOneMenu>
+                </f:ajax>
+              </div>
+              
+              <h:panelGroup class="field" id="subCategoria">
+	              <div class="field">
+	                <label>Sub Categoria</label>
+	                <h:selectOneMenu value="#{estoqueManagedBean.estoque.subCategoria.id}"  class="ui fluid dropdown" >
+	                  <f:selectItem  itemValue="" itemLabel="Sub Categoria"></f:selectItem>
+	                  <f:selectItems value="#{estoqueManagedBean.subCategorias}" var="s"
+	                  itemLabel="#{s.nome}" itemValue="#{s.id}" />
+	                </h:selectOneMenu>
+	              </div>
+              </h:panelGroup>
+            </div>
+            <div class="three fields">
+              <div class="field">
+                <label>Qtd Por Unidade</label>
+                <h:inputText value="#{estoqueManagedBean.estoque.medida.medidaPorUnidade}" name="itemEstoque[quantidadePorUnidade]" placeholder="qtd por unidade (ex: 600 un medida ml)" type="text" />
+              </div>
+              <div class="field">
+                <label>Un Medida</label>
+
+
+
+                <h:selectOneMenu value="#{estoqueManagedBean.estoque.medida.unidadeMedida}" class="ui fluid dropdown">
+                  <f:selectItem itemValue="" itemLabel="un medida"></f:selectItem>
+                  <f:selectItem itemValue="ml" itemLabel="ml"></f:selectItem>
+                  <f:selectItem itemValue="L" itemLabel="L"></f:selectItem>
+                  <f:selectItem itemValue="g" itemLabel="g"></f:selectItem>
+                  <f:selectItem itemValue="mg" itemLabel="mg"></f:selectItem>
+                  <f:selectItem itemValue="kg" itemLabel="Kg"></f:selectItem>
+                  <f:selectItem itemValue="un" itemLabel="un"></f:selectItem>
+                </h:selectOneMenu>
+              </div>
+              <div class="field">
+                <label>Qtd crítica</label>
+                <h:inputText value="#{estoqueManagedBean.estoque.qtdCritica}" name="itemEstoque[quantidadeCritica]" placeholder="#" type="text" />
+              </div>
+            </div>
+
+            <div class="one field">
+              <div class="field">
+                <h:commandButton rendered="#{estoqueManagedBean.estoque.id eq 0}" styleClass="positive  ui button" binding="#{estoqueManagedBean.btsalvar}" 
+                	id="btsalvar" value="Salvar" action="#{estoqueManagedBean.salvar}"/>
+                <h:commandButton rendered="#{estoqueManagedBean.estoque.id ne 0}" styleClass="positive ui button"  binding="#{estoqueManagedBean.btalterar}" 
+                	id="btalterar" value="Alterar" action="#{estoqueManagedBean.alterar}"></h:commandButton>
+                <h:commandButton styleClass="primary ui button" binding="#{estoqueManagedBean.btpesquisar}" 
+                	id="btpesquisar" value="Pesquisar" action="#{estoqueManagedBean.consultar}"/>
+                <h:link value="Lista" styleClass="secondary  ui button" outcome="listaEstoque"/>
+				<h:link styleClass="submit ui button" outcome="cadastroEstoque" value="Novo" />
+              </div>
+            </div>
+
+            <h:message style="color:red;display:block;" for="msg"></h:message>
+          </h:form>
+          </div>
+        </div>
+  </div>
+
+
+  <div class="ui modal" id="myModal" style="margin-top: -200px;">
+    <i class="close icon"></i>
+    <div class="header">
+      Entrada Estoque
+    </div>
+    <h:form class="ui inverted form">
+   	  <div class="ui inverted segment">
+		  <div class="ui inverted form">
+		    <div class="two fields">
+		      <div class="field">
+		        <label>Quantidade Entrada</label>
+		        <h:inputText id="quantidade"  value="#{estoqueManagedBean.qtd}" placeholder="# Quantidade" type="text"/>
+		      </div>
+		      <div class="field">
+		        <label>Custo Total da entrada</label>
+		        <h:inputText id="valorTotal"  value="#{estoqueManagedBean.valor}" placeholder="R$ valor total" type="text"/>
+		      </div>
+		    </div>
+		    <h:commandButton styleClass="ui positive button" value="Adicionar" action="#{estoqueManagedBean.adicionarItensEstoque}"/>
+   			<div class="negative ui button" onclick="$('.ui.modal').hide();">Cancel</div>
+		  </div>
+		</div>
+    
+    </h:form>
+  </div>
+</div>
+</h:body>
+</html>
+
+

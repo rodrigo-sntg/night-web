@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente</title>
+    <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="lib/semantic/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script src="lib/semantic/examples/assets/library/jquery.min.js"></script>
+    <script src="lib/semantic/dist/semantic.min.js"></script>
+
+    <script src="js/highcharts.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/drilldown.js"></script>
+
+    <script type="text/javascript">
+
+
+    $( document ).ready(function() {
+
+      $(function () {
+    // Create the chart
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Faturamento Mensal 2016'
+        },
+        subtitle: {
+            text: 'Clique nas categorias para detalhar por subcategoria'
+        },
+        xAxis: {
+            type: 'category'
+        },
+        yAxis: {
+            title: {
+                text: 'Faturamento'
+            }
+
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: 'R$ {point.y:.2f}'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: R$ <b>{point.y:.2f}</b> de faturamento<br/>'
+        },
+
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'Bebidas',
+                y: 35000,
+                drilldown: 'Bebidas'
+            }, {
+                name: 'Alimentos',
+                y: 29000,
+                drilldown: 'Alimentos'
+            }, {
+                name: 'Serviços',
+                y: 26000,
+                drilldown: 'Serviços'
+            }]
+        }],
+        drilldown: {
+            series: [{
+                name: 'Bebidas',
+                id: 'Bebidas',
+                data: [{name:'Cerveja',
+                        y:10000,
+                        drilldown:'bebidasSub'}
+                    ,
+                    [
+                        'Tequila',
+                        10000
+                    ],
+                    [
+                        'Whisky',
+                        6000
+                    ],
+                    [
+                        'Vodka',
+                        6000
+                    ]
+                ]
+            }, {
+                name: 'Alimentos',
+                id: 'Alimentos',
+                data: [
+                    [
+                        'Porção fritas',
+                        29
+                    ],
+                    [
+                        'X Bacon',
+                        30
+                    ],
+                    [
+                        'Porção Calabresa',
+                        15
+                    ],
+                    [
+                        'Arroz e feijão com farofa',
+                        125
+                    ]
+                ]
+            }, {
+                name: 'Serviços',
+                id: 'Serviços',
+                data: [
+                    [
+                        'Massagem',
+                        200
+                    ],
+                    [
+                        'Chapelaria',
+                        150
+                    ],
+                    [
+                        'Arco e flecha',
+                        253.2
+                    ],
+                    [
+                        'Estacionamento',
+                        120.8
+                    ]
+                ]
+            }, {
+                name: 'Janeiro Semana Um',
+                id: 'bebidasSub',
+                data: [
+                    [
+                        'Skol lata 269ml',
+                        3000
+                    ],
+                    [
+                        'Brahma lata 269ml',
+                        3000
+                    ],
+                    [
+                        'Heineken 470ml',
+                        2000
+                    ],
+                    [
+                        'budweiser 370ml',
+                        3000
+                    ],
+                    [
+                        'heineken garrafa 600ml',
+                        2000
+                    ],
+                    [
+                        'budweiser garrafa 1l',
+                        4000
+                    ],
+                    [
+                        'stella artois garrafa 990ml',
+                        3000
+                    ]
+                ]
+            }]
+        }
+    });
+});
+
+
+  });
+
+
+    </script>
+  </head>
+  <body>
+  <header>
+
+  </header>
+    <div class="ui raised very padded text container segment">
+      <h3 class="ui dividing header">Faturamento Mensal</h3>
+      <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </div>
+  </body>
+</html>
+
+
