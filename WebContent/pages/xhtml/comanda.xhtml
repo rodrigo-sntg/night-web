@@ -184,7 +184,8 @@
 							    <div class="ui right floated content">
 							    
 							    	<h:commandButton class="btitem#{value.id}" style="display:none"  immediate="true" action="#{comandaManagedBean.altera(value.id)}">
-							    	<f:ajax  render="@this modItem"></f:ajax></h:commandButton>
+							    		<f:ajax  render="@this modItem"></f:ajax>
+							    	</h:commandButton>
 							    
 							      <a class="icon item" onclick="clicar(#{value.id});$('#modalQtd').modal('show');return false;"><i class="add chevron icon"/></a>
 							    </div>
@@ -295,6 +296,11 @@
 			  
 			</div>
 		
+		<h:form>
+		<h:commandButton styleClass="positive ui button"  value="render">
+							        			<f:ajax render=":tabela"/>
+							        			</h:commandButton>
+							        			</h:form>
 		
 		  	<div class="ui modal" id="modalNovo">
 			    <i class="close icon"></i>
@@ -325,7 +331,7 @@
 					      <div class="ui button">Cancel</div>
 					      <h:commandButton styleClass="positive ui button"  immediate="false"
 							        			value="Adicionar" onclick="$('.ui.modal').hide();" action="#{comandaManagedBean.inserirItemLista}">
-							        			<f:ajax render="@form @this tabela" immediate="false"/>
+							        			<f:ajax render="@form @this :tabela" immediate="false"/>
 							        			</h:commandButton>
 					    </div>
 				    </h:form>
@@ -350,10 +356,10 @@
 						        </div>
 						    <div class="actions">
 						      <div class="ui button">Cancel</div>
-						      <h:commandButton styleClass="positive ui button"  immediate="false"
-								        			value="Adicionar" onclick="$('.ui.modal').hide();" action="#{comandaManagedBean.inserirItemLista}">
-								        			<f:ajax render="@form @this tabela" immediate="false"/>
-								        			</h:commandButton>
+								<h:commandButton styleClass="positive ui button"  immediate="false"
+									value="Adicionar" onclick="$('.ui.modal').hide();" action="#{comandaManagedBean.inserirItemLista}">
+										<f:ajax render="@form @this :tabela" immediate="false"/>
+		        				</h:commandButton>
 						    </div>
 					    </h:form>
 					</div>

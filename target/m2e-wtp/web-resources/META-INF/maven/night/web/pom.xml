@@ -25,6 +25,14 @@
     </plugins>
   </build>
   
+  <properties>
+    <selenium.version>2.39.0</selenium.version>
+    <maven.surefire.plugin.version>2.16</maven.surefire.plugin.version>
+    <testng.version>6.8.7</testng.version>
+  </properties>
+  
+  
+  
   <dependencies>
 	 <dependency>
 		 <!-- Provided by Tomcat, but needed for compilation -->
@@ -38,6 +46,29 @@
 		 <artifactId>dominio</artifactId>
 		 <version>0.0.1-SNAPSHOT</version>
 	 </dependency>
+	 
+	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+<!-- 	<dependency> -->
+<!-- 	    <groupId>org.seleniumhq.selenium</groupId> -->
+<!-- 	    <artifactId>selenium-java</artifactId> -->
+<!-- 	    <version>2.30.0</version> -->
+<!-- 	</dependency> -->
+	
+	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver -->
+	<dependency>
+	    <groupId>org.seleniumhq.selenium</groupId>
+	    <artifactId>selenium-chrome-driver</artifactId>
+	    <version>2.30.0</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/junit/junit -->
+	<dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.11</version>
+	</dependency>
+
+
 	 
 	<dependency>
 	  <!-- Provided by Tomcat, but needed for compilation -->
@@ -88,6 +119,11 @@
 	  <version>2.2.8-02</version>
 	  <scope>runtime</scope>
 	</dependency>
+	
+	
+	
 
   </dependencies>
+  
+  
 </project>
