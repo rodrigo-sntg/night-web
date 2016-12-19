@@ -165,7 +165,7 @@ public class ClienteManagedBean extends CustomManagedBean<Cliente> {
 		 */
 
 		if (cliente == null || cliente.getCpf() == 0) {
-			FacesMessage message = new FacesMessage("É necessário pesquisar um cliente para excluir.");
+			FacesMessage message = new FacesMessage("É necessário pesquisar um testes para excluir.");
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(super.btexcluir.getClientId(context), message);
 		}

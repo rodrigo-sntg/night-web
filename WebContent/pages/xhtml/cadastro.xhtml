@@ -109,7 +109,7 @@
           <div class="fields">
               <div class="twelve wide field">
                 <label>Nome</label>
-                <h:inputText name="cliente.nome" id="inputnome" value="#{clienteManagedBean.cliente.nome}" placeholder="Nome" type="text"/>
+                <h:inputText name="testes.nome" id="inputnome" value="#{clienteManagedBean.cliente.nome}" placeholder="Nome" type="text"/>
               </div>
               <div class="four wide field">
                 <label>Data Nascimento</label>
@@ -127,15 +127,15 @@
           <div class="three fields">
             <div class="field">
               <label>CPF</label>
-              <h:inputText styleClass="cpf" name="cliente.cpf" required="true" value="#{clienteManagedBean.cpf}" placeholder="Rua" type="text"/>
+              <h:inputText styleClass="cpf" name="testes.cpf" required="true" value="#{clienteManagedBean.cpf}" placeholder="Rua" type="text"/>
             </div>
             <div class="field">
               <label>RG</label>
-              <h:inputText styleClass="rg"  name="cliente.rg" value="#{clienteManagedBean.rg}" placeholder="Apt #" type="text"/>
+              <h:inputText styleClass="rg"  name="testes.rg" value="#{clienteManagedBean.rg}" placeholder="Apt #" type="text"/>
             </div>
             <div class="field">
               <label>Telefone</label>
-              <h:inputText styleClass="telefone" name="cliente.telefone" value="#{clienteManagedBean.telefone}" placeholder="Apt #" type="text"/>
+              <h:inputText styleClass="telefone" name="testes.telefone" value="#{clienteManagedBean.telefone}" placeholder="Apt #" type="text"/>
             </div>
           </div>
 
@@ -145,22 +145,22 @@
             <div class="fields">
               <div class="twelve wide field">
   	          <label>Rua</label>
-                <h:inputText name="cliente.endereco.rua" value="#{clienteManagedBean.cliente.endereco.rua}" placeholder="Rua" type="text"/>
+                <h:inputText name="testes.endereco.rua" id="inputrua" value="#{clienteManagedBean.cliente.endereco.rua}" placeholder="Rua" type="text"/>
               </div>
               <div class="four wide field">
               	<label>Complemento</label>
-                <h:inputText name="cliente.endereco.complemento" value="#{clienteManagedBean.cliente.endereco.complemento}" placeholder="Apt #" type="text"/>
+                <h:inputText name="testes.endereco.complemento" id="inputcomplemento" value="#{clienteManagedBean.cliente.endereco.complemento}" placeholder="Apt #" type="text"/>
               </div>
             </div>
           </div>
           <div class="fields">
             <div class="eight wide field">
               <label>Cidade</label>
-              <h:inputText name="cliente.endereco.cidade" value="#{clienteManagedBean.cliente.endereco.cidade}" placeholder="cidade" type="text"/>
+              <h:inputText name="testes.endereco.cidade" id="inputcidade" value="#{clienteManagedBean.cliente.endereco.cidade}" placeholder="cidade" type="text"/>
             </div>
             <div class="eight wide field">
               <label>Estado</label>
-              <h:selectOneMenu value="#{clienteManagedBean.cliente.endereco.estado}" class="ui fluid dropdown">
+              <h:selectOneMenu value="#{clienteManagedBean.cliente.endereco.estado}" id="selectestado" class="ui fluid dropdown">
                 <f:selectItem itemValue="" itemLabel=""/>
                 <f:selectItem itemValue="ac" itemLabel="Acre"/>
                 <f:selectItem itemValue="al" itemLabel="Alagoas"/>
@@ -202,7 +202,7 @@
   	        	id="btalterar" ></h:commandButton>
   	        <h:commandButton styleClass="negative  ui button" rendered="#{clienteManagedBean.cliente.id ne 0}" value="Inativar" action="#{clienteManagedBean.excluir}" 
   	        	id="btexcluir" ></h:commandButton>
-  	        <h:link styleClass="submit ui button" outcome="cadastro" value="Novo" />
+  	        <h:link styleClass="submit ui button" id="btnovo" outcome="cadastro" value="Novo" />
   	        
   	        <h:panelGroup class="field" rendered="#{clienteManagedBean.cliente.id ne 0}" id="comandaPanel" style="margin-top:10px">
   		        <h4 style="margin-top:10px" class="ui dividing header">Comanda</h4>
@@ -217,10 +217,10 @@
   		        </div>	        
   	        </h:panelGroup>
   	        
-  	        <h:message style="color:red;display:block;" for="btsalvar"></h:message>
-  	        <h:message style="color:red;display:block;" for="btpesquisar"></h:message>
-  	        <h:message style="color:red;display:block;" for="btexcluir"></h:message>
-  	        <h:message style="color:red;display:block;" for="btalterar"></h:message>
+  	        <h:message id="labelErroSalvar" style="color:red;display:block;" for="btsalvar"></h:message>
+  	        <h:message id="labelErroPesquisar" style="color:red;display:block;" for="btpesquisar"></h:message>
+  	        <h:message id="labelErroExcluir" style="color:red;display:block;" for="btexcluir"></h:message>
+  	        <h:message id="labelErroAlterar" style="color:red;display:block;" for="btalterar"></h:message>
         </h:form>
         </div>
       </div>

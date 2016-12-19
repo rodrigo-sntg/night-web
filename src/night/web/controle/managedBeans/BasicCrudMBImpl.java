@@ -114,7 +114,7 @@ public abstract class BasicCrudMBImpl<Bean> extends BasicMBImpl {
 	 * criar um formulário de inserção de clientes e querer chamá-lo através de
 	 * outra tela que não tem nada haver com o contexto atual, assim você
 	 * precisa abstrair o componente que será atualizado após a inserção do novo
-	 * cliente.
+	 * testes.
 	 */
 	public void deletar(ActionEvent event) {
 		try {

@@ -114,7 +114,7 @@
                 <div class="ten wide column">
                   <div class="field">
                     <label>Nome Item</label>
-                    <h:inputText name="itemEstoque[nomeItem]" value="#{estoqueManagedBean.estoque.nomeItem}" placeholder="Nome Item" type="text" />
+                    <h:inputText name="itemEstoque[nomeItem]"  styleClass="inputNomeEstoque" id="nomeEstoque" value="#{estoqueManagedBean.estoque.nomeItem}" placeholder="Nome Item" type="text" />
                   </div>
                 </div>
                 <div class="six wide column">
@@ -123,10 +123,10 @@
                   	<div class="ui search">
 					  <div class="ui icon input">
 					  	<h:panelGroup rendered="#{estoqueManagedBean.estoque.id eq 0}">
-						    <h:inputText styleClass="prompt" value="#{estoqueManagedBean.estoque.id}" placeholder="# sei lá" type="text"/>
+						    <h:inputText id="inputVazioCodigo" styleClass="prompt" value="#{estoqueManagedBean.estoque.id}" placeholder="# sei lá" type="text"/>
 					  	</h:panelGroup>
 					  	<h:panelGroup rendered="#{estoqueManagedBean.estoque.id ne 0}">
-						    <h:inputText class="prompt" disabled="true" value="#{estoqueManagedBean.estoque.id}" placeholder="# Código" type="text"/>
+						    <h:inputText class="prompt" id="inputNaoVazioCodigo" disabled="true" value="#{estoqueManagedBean.estoque.id}" placeholder="# Código" type="text"/>
 					  	</h:panelGroup>					    
 					    <i class="search icon"></i>
 					  </div>
@@ -139,14 +139,14 @@
             <div class="one field">
               <div class="field">
                 <label>Descrição</label>
-                <h:inputText name="itemEstoque[descricao]" value="#{estoqueManagedBean.estoque.descricao}" placeholder="Descrição" type="text"/>
+                <h:inputText name="itemEstoque[descricao]" id="inputDescricao" value="#{estoqueManagedBean.estoque.descricao}" placeholder="Descrição" type="text"/>
               </div> 
             </div>
             <div class="two fields">
               <div class="field">
                 <label>Categoria</label>
-                <f:ajax event="change" immediate="false" listener="#{estoqueManagedBean.carregaSubCategoria}" render="subCategoria">
-	                <h:selectOneMenu class="ui fluid dropdown" value="#{estoqueManagedBean.estoque.subCategoria.categoria.id}">
+                <f:ajax event="change"  immediate="false" listener="#{estoqueManagedBean.carregaSubCategoria}" render="subCategoria">
+	                <h:selectOneMenu id="selectCategoria" class="ui fluid dropdown" value="#{estoqueManagedBean.estoque.subCategoria.categoria.id}">
 	                  <f:selectItem  itemValue="" itemLabel="Categoria"></f:selectItem>
 	                  <f:selectItems value="#{estoqueManagedBean.categorias}" var="c"
 	                  itemLabel="#{c.nome}" itemValue="#{c.id}" />
@@ -157,7 +157,7 @@
               <h:panelGroup class="field" id="subCategoria">
 	              <div class="field">
 	                <label>Sub Categoria</label>
-	                <h:selectOneMenu value="#{estoqueManagedBean.estoque.subCategoria.id}"  class="ui fluid dropdown" >
+	                <h:selectOneMenu id="selectSubCategoria" value="#{estoqueManagedBean.estoque.subCategoria.id}"  class="ui fluid dropdown" >
 	                  <f:selectItem  itemValue="" itemLabel="Sub Categoria"></f:selectItem>
 	                  <f:selectItems value="#{estoqueManagedBean.subCategorias}" var="s"
 	                  itemLabel="#{s.nome}" itemValue="#{s.id}" />
@@ -175,7 +175,7 @@
 
 
 
-                <h:selectOneMenu value="#{estoqueManagedBean.estoque.medida.unidadeMedida}" class="ui fluid dropdown">
+                <h:selectOneMenu id="selectUnidadeMedida" value="#{estoqueManagedBean.estoque.medida.unidadeMedida}" class="ui fluid dropdown">
                   <f:selectItem itemValue="" itemLabel="un medida"></f:selectItem>
                   <f:selectItem itemValue="ml" itemLabel="ml"></f:selectItem>
                   <f:selectItem itemValue="L" itemLabel="L"></f:selectItem>
@@ -193,7 +193,7 @@
 
             <div class="one field">
               <div class="field">
-                <h:commandButton rendered="#{estoqueManagedBean.estoque.id eq 0}" styleClass="positive  ui button" binding="#{estoqueManagedBean.btsalvar}" 
+                <h:commandButton rendered="#{estoqueManagedBean.estoque.id eq 0}" styleClass="positive  ui button salvab" binding="#{estoqueManagedBean.btsalvar}" 
                 	id="btsalvar" value="Salvar" action="#{estoqueManagedBean.salvar}"/>
                 <h:commandButton rendered="#{estoqueManagedBean.estoque.id ne 0}" styleClass="positive ui button"  binding="#{estoqueManagedBean.btalterar}" 
                 	id="btalterar" value="Alterar" action="#{estoqueManagedBean.alterar}"></h:commandButton>
@@ -205,6 +205,10 @@
             </div>
 
             <h:message style="color:red;display:block;" for="msg"></h:message>
+  	        <h:message id="labelErroSalvar" style="color:red;display:block;" for="btsalvar"></h:message>
+  	        <h:message id="labelErroPesquisar" style="color:red;display:block;" for="btpesquisar"></h:message>
+  	        <h:message id="labelErroExcluir" style="color:red;display:block;" for="btexcluir"></h:message>
+  	        <h:message id="labelErroAlterar" style="color:red;display:block;" for="btalterar"></h:message>
           </h:form>
           </div>
         </div>

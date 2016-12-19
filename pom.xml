@@ -10,6 +10,20 @@
 	    <name>java.net m2 repo</name>
 	    <url>http://download.java.net/maven/2</url>
 	  </repository>
+	<repository>
+	    <id>jboss-public-repository-group</id>
+	    <name>JBoss Public Repository Group</name>
+	    <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+	    <layout>default</layout>
+	    <releases>
+	        <enabled>true</enabled>
+	        <updatePolicy>never</updatePolicy>
+	    </releases>
+	    <snapshots>
+	        <enabled>true</enabled>
+	        <updatePolicy>never</updatePolicy>
+	    </snapshots>
+	</repository>
 	</repositories>
 <build>
     <sourceDirectory>src</sourceDirectory>
@@ -22,6 +36,19 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+
+		<plugin>
+		    <groupId>org.jboss.as.plugins</groupId>
+		    <artifactId>jboss-as-maven-plugin</artifactId>
+		    <executions>
+		        <execution>
+		            <phase>package</phase>
+		            <goals>
+		                <goal>deploy</goal>
+		            </goals>
+		        </execution>
+		    </executions>
+		</plugin>
     </plugins>
   </build>
   
@@ -34,6 +61,7 @@
   
   
   <dependencies>
+  
 	 <dependency>
 		 <!-- Provided by Tomcat, but needed for compilation -->
 		 <groupId>night</groupId>
@@ -46,18 +74,18 @@
 		 <artifactId>dominio</artifactId>
 		 <version>0.0.1-SNAPSHOT</version>
 	 </dependency>
-	 
-	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
-<!-- 	<dependency> -->
-<!-- 	    <groupId>org.seleniumhq.selenium</groupId> -->
-<!-- 	    <artifactId>selenium-java</artifactId> -->
-<!-- 	    <version>2.30.0</version> -->
-<!-- 	</dependency> -->
 	
 	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver -->
 	<dependency>
 	    <groupId>org.seleniumhq.selenium</groupId>
 	    <artifactId>selenium-chrome-driver</artifactId>
+	    <version>2.30.0</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-support -->
+	<dependency>
+	    <groupId>org.seleniumhq.selenium</groupId>
+	    <artifactId>selenium-support</artifactId>
 	    <version>2.30.0</version>
 	</dependency>
 	
@@ -67,8 +95,6 @@
 	    <artifactId>junit</artifactId>
 	    <version>4.11</version>
 	</dependency>
-
-
 	 
 	<dependency>
 	  <!-- Provided by Tomcat, but needed for compilation -->
@@ -92,8 +118,6 @@
 	    <version>2.8.0</version>
 	</dependency>
 	
-	
-	 
 	<dependency>
 	  <!--
 	    JBoss/Weld Refrence Implementation for
@@ -119,10 +143,6 @@
 	  <version>2.2.8-02</version>
 	  <scope>runtime</scope>
 	</dependency>
-	
-	
-	
-
   </dependencies>
   
   

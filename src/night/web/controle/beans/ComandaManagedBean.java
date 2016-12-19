@@ -336,7 +336,9 @@ public class ComandaManagedBean extends CustomManagedBean<Comanda> {
 		item = new ItemConsumo();
 		this.setItemComanda(new ItemComanda());
 
-		return this.alterar();
+		this.alterar();
+
+		return "comanda?faces-redirect=true&numeroComanda=" + comanda.getNumeroComanda();
 
 	}
 

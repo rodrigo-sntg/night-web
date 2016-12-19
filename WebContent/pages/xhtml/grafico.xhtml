@@ -201,9 +201,6 @@
 			    <h:commandButton value="Faturamento x Clientes" onclick="fnCliente()" action="#{graficoManagedBean.graficoClienteFaturamento}" >
 			    	<f:ajax update="@form graficoVendas graficoClientes" event="click" />
 			    </h:commandButton>
-			    <h:commandButton value="Detalhes" action="#{graficoManagedBean.buscarDetalhes}" >
-			    	<f:ajax update="@form graficoVendas graficoClientes" event="click" />
-			    </h:commandButton>
 			    <h:panelGroup id="graficoVendas" rendered="#{graficoManagedBean.graficoVendas}">
 					<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 			    </h:panelGroup>
